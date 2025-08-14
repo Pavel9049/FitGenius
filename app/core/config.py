@@ -21,8 +21,10 @@ class Settings(BaseSettings):
 	log_level: str = Field(default="INFO", alias="LOG_LEVEL")
 
 	# Animations
-	animation_style: str = Field(default="dots", alias="ANIM_STYLE")  # dots|blocks|dissolve|wipe|blink|none
-	animation_frame_ms: int = Field(default=80, alias="ANIM_FRAME_MS")
+	animation_style: str = Field(default="fade", alias="ANIM_STYLE")  # fade|dots|blocks|dissolve|wipe|blink|none
+	animation_frame_ms: int = Field(default=100, alias="ANIM_FRAME_MS")
+	animation_total_ms: int = Field(default=1600, alias="ANIM_TOTAL_MS")
+	animation_max_frames: int = Field(default=24, alias="ANIM_MAX_FRAMES")
 
 
 @lru_cache
