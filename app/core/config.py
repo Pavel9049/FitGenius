@@ -20,6 +20,10 @@ class Settings(BaseSettings):
 	sentry_dsn: Optional[str] = Field(default=None, alias="SENTRY_DSN")
 	log_level: str = Field(default="INFO", alias="LOG_LEVEL")
 
+	# Animations
+	animation_style: str = Field(default="dots", alias="ANIM_STYLE")  # dots|blocks|dissolve|wipe|blink|none
+	animation_frame_ms: int = Field(default=80, alias="ANIM_FRAME_MS")
+
 
 @lru_cache
 def get_settings() -> Settings:

@@ -1,18 +1,27 @@
 import asyncio
 from aiogram.types import Message
+from app.core.config import get_settings
+
+
+_STYLES = {
+	"dots": ["…", "..", ".", ""],
+	"blocks": ["██████████", "▓▓▓▓▓▓▓▓▓▓", "▒▒▒▒▒▒▒▒▒▒", "░░░░░░░░░░", ""],
+	"dissolve": ["…", "· · ·", "·  ·  ·", " ", ""],
+	"wipe": ["──────────", "───────", "────", "──", "",],
+	"blink": [" ", "…", " ", "…", ""],
+	"none": [""],
+}
 
 
 async def evaporate_and_edit(message: Message, new_text: str, reply_markup=None) -> None:
+	settings = get_settings()
+	style = _STYLES.get(settings.animation_style, _STYLES["dots"])  # type: ignore[arg-type]
+	frame_delay = max(0, settings.animation_frame_ms) / 1000.0
 	try:
-		current = message.text or ""
-		# Фреймы испарения
-		await message.edit_text(current + "\n…", reply_markup=None)
-		await asyncio.sleep(0.08)
-		await message.edit_text("▒▒▒▒▒▒▒▒▒▒", reply_markup=None)
-		await asyncio.sleep(0.08)
-		await message.edit_text("░░░░░░░░░░", reply_markup=None)
-		await asyncio.sleep(0.08)
+		for frame in style:
+			cur = frame if frame else ""
+			await message.edit_text(cur or " ")
+			await asyncio.sleep(frame_delay)
 	except Exception:
-		# Если редактирование невозможно, просто продолжим
 		pass
 	await message.edit_text(new_text, reply_markup=reply_markup)
