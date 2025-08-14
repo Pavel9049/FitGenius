@@ -101,23 +101,36 @@ async def show_program_detail(call: CallbackQuery) -> None:
 		from app.domain.models.exercise import Exercise
 		pe = session.scalars(select(ProgramExercise).where(ProgramExercise.program_id == program_id).order_by(ProgramExercise.order_index)).all()
 		ex_ids = [x.exercise_id for x in pe]
-		exs = session.scalars(select(Exercise).where(Exercise.id.in_(ex_ids))).all()
+		ex_map = {e.id: e for e in session.scalars(select(Exercise).where(Exercise.id.in_(ex_ids))).all()}
+		lines = []
+		for row in pe:
+			ex = ex_map.get(row.exercise_id)
+			if not ex:
+				continue
+			meta = []
+			if row.sets_desc:
+				meta.append(row.sets_desc)
+			if row.rest_desc:
+				meta.append(row.rest_desc)
+			meta_str = f" ({', '.join(meta)})" if meta else ""
+			if row.tip_text:
+				lines.append(f"• {ex.name}{meta_str}\n  💡 {row.tip_text}")
+			else:
+				lines.append(f"• {ex.name}{meta_str}")
+		# Добавляем упражнения на пресс
 		if type_ == "gym" or type_ == "split":
 			core_pool = session.scalars(select(Exercise).where(Exercise.muscle_group == "core", Exercise.equipment == "gym")).all()
 		else:
 			core_pool = session.scalars(select(Exercise).where(Exercise.muscle_group == "core", Exercise.equipment == "bodyweight")).all()
 		limit = _CORE_LIMIT.get(level, 3)
-		core_add = core_pool[:limit]
-		exs_extended = exs + core_add
+		for ex in core_pool[:limit]:
+			lines.append(f"• {ex.name} (пресс)")
 		prog = session.get(WorkoutProgram, program_id)
 	kb = InlineKeyboardBuilder()
 	for diff in ["Лёгкая", "Средняя", "Сложная"]:
 		kb.button(text=diff, callback_data=f"prog:diff:{program_id}:{level}:{type_}:{diff}")
 	kb.adjust(3)
-	desc_lines = [f"{prog.name}", "Упражнения:"] + [f"• {ex.name}" for ex in exs_extended]
-	desc_lines.append("")
-	desc_lines.append("(Автоматически добавлено: упражнения на пресс)")
-	desc = "\n".join(desc_lines)
+	desc = f"{prog.name}\nУпражнения:\n" + "\n".join(lines)
 	await evaporate_and_edit(call.message, desc + "\nВыберите сложность для подбора весов:", reply_markup=kb.as_markup())
 	await call.answer()
 

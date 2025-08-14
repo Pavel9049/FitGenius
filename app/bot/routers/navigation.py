@@ -13,6 +13,7 @@ from sqlalchemy import select
 import os
 from app.infra.content.loader import import_workouts_dataset, import_splits_dataset
 from app.bot.utils.animations import evaporate_and_edit
+from app.domain.services.phrases_service import get_random_phrase
 
 router = Router(name=__name__)
 
@@ -100,8 +101,17 @@ async def cb_pay(call: CallbackQuery) -> None:
 
 
 @router.callback_query(F.data == "start:profile")
-async def cb_profile(call: CallbackQuery) -> None:
-	await evaporate_and_edit(call.message, "Профиль и прогресс появятся здесь.")
+async def cb_profile(call: CallbackQuery, lang: str) -> None:
+	with get_session() as session:
+		from app.domain.models.user import User
+		user = session.scalar(select(User).where(User.tg_id == call.from_user.id))
+		if not user:
+			await evaporate_and_edit(call.message, "Профиль не найден.")
+			await call.answer()
+			return
+		phrase = get_random_phrase(lang)
+		text = f"Ваш профиль\nXP: {user.xp}\nЗвёзды: {user.stars}\nСерия дней (streak): {user.streak}\n\n{phrase}"
+	await evaporate_and_edit(call.message, text)
 	await call.answer()
 
 
