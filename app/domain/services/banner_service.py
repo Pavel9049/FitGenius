@@ -3,6 +3,7 @@ from __future__ import annotations
 import random
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
+from app.core.config import get_settings
 
 _SPORT_EMOJI = ["🏋️‍♂️", "🏃‍♀️", "🥇", "🔥", "💪", "🏆", "🚴", "🥊", "🧘", "⛹️"]
 _SEPARATORS = ["═", "─", "━", "·", "•", "—"]
@@ -13,7 +14,7 @@ _ASSETS.mkdir(parents=True, exist_ok=True)
 def get_header() -> str:
 	icon = random.choice(_SPORT_EMOJI)
 	sep = random.choice(_SEPARATORS) * 18
-	title = "FitCode"
+	title = get_settings().banner_title
 	return f"{icon} {title} {icon}\n{sep}"
 
 
@@ -51,7 +52,7 @@ def generate_banner_image() -> Path:
 	# Текст
 	font_big = _load_font(80)
 	font_small = _load_font(28)
-	title = "FitCode"
+	title = get_settings().banner_title
 	sub = "Fitness • Workouts • Nutrition"
 	draw.text((260, cy - 40), title, font=font_big, fill=(255, 255, 255))
 	draw.text((260, cy + 40), sub, font=font_small, fill=(230, 230, 230))
@@ -71,4 +72,4 @@ def get_welcome_banner() -> str:
 		"╚═╝     ╚═╝   ╚═╝    ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝",
 	]
 	banner = "\n".join(lines)
-	return f"{banner}\nFitCode"
+	return f"{banner}\n{get_settings().banner_title}"

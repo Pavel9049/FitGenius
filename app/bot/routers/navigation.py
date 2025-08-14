@@ -11,10 +11,11 @@ from app.domain.models.subscription import Subscription
 from sqlalchemy import select
 
 import os
-from app.infra.content.loader import import_workouts_dataset, import_splits_dataset
+from app.infra.content.loader import import_workouts_dataset, import_splits_dataset, import_levels_dataset
 from app.bot.utils.animations import evaporate_and_edit
 from app.domain.services.phrases_service import get_random_phrase
 from app.domain.services.banner_service import get_header, get_welcome_banner, generate_banner_image
+from app.core.config import get_settings
 
 router = Router(name=__name__)
 
@@ -42,10 +43,13 @@ async def start(message: Message, lang: str) -> None:
 		with get_session() as session:
 			workouts_path = "/workspace/data/workouts.json"
 			splits_path = "/workspace/data/splits.json"
+			levels_path = "/workspace/data/levels.json"
 			if os.path.exists(workouts_path):
 				import_workouts_dataset(session, workouts_path)
 			if os.path.exists(splits_path):
 				import_splits_dataset(session, splits_path)
+			if os.path.exists(levels_path):
+				import_levels_dataset(session, levels_path)
 		_INITIALIZED = True
 	with get_session() as session:
 		workout = WorkoutsService(session)
@@ -60,7 +64,7 @@ async def start(message: Message, lang: str) -> None:
 	# Пытаемся отправить фото-баннер
 	photo_path = generate_banner_image()
 	try:
-		msg = await message.answer_photo(FSInputFile(str(photo_path)), caption="FitCode")
+		msg = await message.answer_photo(FSInputFile(str(photo_path)), caption=get_settings().banner_title)
 	except Exception:
 		banner = get_welcome_banner()
 		msg = await message.answer(banner)
