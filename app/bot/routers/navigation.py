@@ -50,6 +50,10 @@ async def start(message: Message, lang: str) -> None:
 		trial_service = TrialService(session)
 		trial_available = not trial_service.has_used_trial(user)
 		has_active = _has_active_subscription(session, message.from_user.id)
+	try:
+		await message.delete()
+	except Exception:
+		pass
 	await message.answer(
 		"Добро пожаловать! Выберите действие ниже:",
 		reply_markup=main_menu_keyboard(trial_available, has_active),
@@ -63,7 +67,6 @@ async def cb_terms(call: CallbackQuery, lang: str) -> None:
 		text = open(path, "r", encoding="utf-8").read()
 	except Exception:
 		text = "Пользовательское соглашение временно недоступно."
-	# Telegram ограничивает длину сообщений; отрежем до ~3500 символов
 	if len(text) > 3500:
 		text = text[:3500] + "\n..."
 	await call.message.edit_text(text)

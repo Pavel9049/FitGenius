@@ -15,25 +15,21 @@ GOALS = ["Похудеть", "Набор массы", "Сушка", "Подде�
 @router.callback_query(F.data.startswith("prog:level:"))
 async def pick_level(call: CallbackQuery) -> None:
 	level = call.data.split(":", 2)[2]
-	# Для уровней novice/advanced/pro — сначала спрашиваем цель
 	if level in ("novice", "advanced", "pro"):
 		kb = InlineKeyboardBuilder()
 		for g in GOALS:
 			kb.button(text=g, callback_data=f"prog:setgoal:{level}:{g}")
 		kb.adjust(2)
-		await call.message.edit_text("Выберите вашу цель тренировки:")
-		await call.message.edit_reply_markup(reply_markup=kb.as_markup())
+		await call.message.edit_text("Выберите вашу цель тренировки:", reply_markup=kb.as_markup())
 		await call.answer()
 		return
-	# Иначе сразу к типу
 	kb = InlineKeyboardBuilder()
 	kb.button(text="Сплит", callback_data=f"prog:type:split:{level}")
 	kb.button(text="Дом", callback_data=f"prog:type:home:{level}")
 	kb.button(text="Улица", callback_data=f"prog:type:street:{level}")
 	kb.button(text="Зал", callback_data=f"prog:type:gym:{level}")
 	kb.adjust(2)
-	await call.message.edit_text("Выберите тип программы")
-	await call.message.edit_reply_markup(reply_markup=kb.as_markup())
+	await call.message.edit_text("Выберите тип программы", reply_markup=kb.as_markup())
 	await call.answer()
 
 
@@ -51,8 +47,7 @@ async def set_goal(call: CallbackQuery, lang: str) -> None:
 	kb.button(text="Улица", callback_data=f"prog:type:street:{level}")
 	kb.button(text="Зал", callback_data=f"prog:type:gym:{level}")
 	kb.adjust(2)
-	await call.message.edit_text(f"Цель сохранена: {goal}. Теперь выберите тип программы:")
-	await call.message.edit_reply_markup(reply_markup=kb.as_markup())
+	await call.message.edit_text(f"Цель сохранена: {goal}. Теперь выберите тип программы:", reply_markup=kb.as_markup())
 	await call.answer()
 
 
@@ -73,8 +68,7 @@ async def pick_type(call: CallbackQuery) -> None:
 		}[mg]
 		kb.button(text=text, callback_data=f"prog:mg:{mg}:{type_}:{level}")
 	kb.adjust(2)
-	await call.message.edit_text("Выберите группу мышц")
-	await call.message.edit_reply_markup(reply_markup=kb.as_markup())
+	await call.message.edit_text("Выберите группу мышц", reply_markup=kb.as_markup())
 	await call.answer()
 
 
@@ -89,8 +83,7 @@ async def show_programs(call: CallbackQuery) -> None:
 	for pv in views[:10]:
 		kb.button(text=pv.program.name, callback_data=f"prog:show:{pv.program.id}:{level}:{type_}")
 	kb.adjust(1)
-	await call.message.edit_text(f"Программы для {mg} — {level}/{type_}")
-	await call.message.edit_reply_markup(reply_markup=kb.as_markup())
+	await call.message.edit_text(f"Программы для {mg} — {level}/{type_}", reply_markup=kb.as_markup())
 	await call.answer()
 
 
@@ -108,7 +101,6 @@ async def show_program_detail(call: CallbackQuery) -> None:
 		pe = session.scalars(select(ProgramExercise).where(ProgramExercise.program_id == program_id).order_by(ProgramExercise.order_index)).all()
 		ex_ids = [x.exercise_id for x in pe]
 		exs = session.scalars(select(Exercise).where(Exercise.id.in_(ex_ids))).all()
-		# Добавляем упражнения на пресс автоматически
 		if type_ == "gym" or type_ == "split":
 			core_pool = session.scalars(select(Exercise).where(Exercise.muscle_group == "core", Exercise.equipment == "gym")).all()
 		else:
@@ -125,8 +117,7 @@ async def show_program_detail(call: CallbackQuery) -> None:
 	desc_lines.append("")
 	desc_lines.append("(Автоматически добавлено: упражнения на пресс)")
 	desc = "\n".join(desc_lines)
-	await call.message.edit_text(desc + "\nВыберите сложность для подбора весов:")
-	await call.message.edit_reply_markup(reply_markup=kb.as_markup())
+	await call.message.edit_text(desc + "\nВыберите сложность для подбора весов:", reply_markup=kb.as_markup())
 	await call.answer()
 
 
@@ -138,8 +129,7 @@ async def choose_goal_and_weights(call: CallbackQuery) -> None:
 	for goal in GOALS:
 		kb.button(text=goal, callback_data=f"prog:goal:{program_id}:{level}:{type_}:{diff}:{goal}")
 	kb.adjust(2)
-	await call.message.edit_text("Выберите цель тренировки:")
-	await call.message.edit_reply_markup(reply_markup=kb.as_markup())
+	await call.message.edit_text("Выберите цель тренировки:", reply_markup=kb.as_markup())
 	await call.answer()
 
 

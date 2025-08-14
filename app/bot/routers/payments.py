@@ -14,6 +14,10 @@ router = Router(name=__name__)
 
 @router.message(Command("plans"))
 async def plans(message: Message, lang: str) -> None:
+	try:
+		await message.delete()
+	except Exception:
+		pass
 	lines = ["Доступные планы:"]
 	for key, meta in PLANS.items():
 		lines.append(f"- {key}: {meta['price']}₽")
@@ -23,6 +27,10 @@ async def plans(message: Message, lang: str) -> None:
 
 @router.message(Command("buy"))
 async def buy(message: Message, lang: str) -> None:
+	try:
+		await message.delete()
+	except Exception:
+		pass
 	parts = message.text.split()
 	if len(parts) < 2:
 		await message.answer("Укажите план: /buy beginner|novice|advanced|pro")
