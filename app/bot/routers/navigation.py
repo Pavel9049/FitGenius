@@ -10,8 +10,13 @@ from app.domain.services.trial_service import TrialService
 from app.domain.models.subscription import Subscription
 from sqlalchemy import select
 
+import os
+from app.infra.content.loader import import_workouts_dataset, import_splits_dataset
+
 router = Router(name=__name__)
 
+
+_INITIALIZED = False
 
 def _has_active_subscription(session: Session, tg_id: int) -> bool:
 	from app.domain.models.user import User
@@ -24,6 +29,16 @@ def _has_active_subscription(session: Session, tg_id: int) -> bool:
 
 @router.message(CommandStart())
 async def start(message: Message, lang: str) -> None:
+	global _INITIALIZED
+	if not _INITIALIZED:
+		with get_session() as session:
+			workouts_path = "/workspace/data/workouts.json"
+			splits_path = "/workspace/data/splits.json"
+			if os.path.exists(workouts_path):
+				import_workouts_dataset(session, workouts_path)
+			if os.path.exists(splits_path):
+				import_splits_dataset(session, splits_path)
+		_INITIALIZED = True
 	with get_session() as session:
 		workout = WorkoutsService(session)
 		user = workout.ensure_user(tg_id=message.from_user.id, language=lang)
