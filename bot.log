@@ -95,3 +95,4 @@ aiogram.exceptions.TelegramBadRequest: Telegram server says - Bad Request: messa
 ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
 WARNING:aiogram.dispatcher:Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8269244638)
 INFO:aiogram.dispatcher:Connection established (tryings = 1, bot id = 8269244638)
+INFO:aiogram.event:Update id=268029257 is handled. Duration 336 ms by bot id=8269244638
