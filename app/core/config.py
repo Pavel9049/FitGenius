@@ -27,6 +27,9 @@ class Settings(BaseSettings):
 	animation_max_frames: int = Field(default=24, alias="ANIM_MAX_FRAMES")
 	animation_behavior: str = Field(default="delete_then_send", alias="ANIM_BEHAVIOR")  # edit|delete_then_send
 
+	# Branding
+	banner_title: str = Field(default="FitCode", alias="BANNER_TITLE")
+
 
 @lru_cache
 def get_settings() -> Settings:

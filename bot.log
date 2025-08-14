@@ -4,3 +4,6 @@ INFO:apscheduler.scheduler:Scheduler started
 INFO:root:MyFitnessBot starting polling (env=local, anim_style=ultra, behavior=delete_then_send)
 INFO:aiogram.dispatcher:Start polling
 INFO:aiogram.dispatcher:Run polling for bot @FitCoode_bot id=8269244638 - 'FItCode'
+ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+WARNING:aiogram.dispatcher:Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8269244638)
+INFO:aiogram.dispatcher:Connection established (tryings = 1, bot id = 8269244638)
