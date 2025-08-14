@@ -16,6 +16,7 @@ class User(Base):
 	email: Mapped[str | None] = mapped_column(String(255), nullable=True)
 	phone: Mapped[str | None] = mapped_column(String(50), nullable=True)
 	language: Mapped[str] = mapped_column(String(5), default="ru")
+	training_goal: Mapped[str | None] = mapped_column(String(32), nullable=True)
 	xp: Mapped[int] = mapped_column(Integer, default=0)
 	stars: Mapped[int] = mapped_column(Integer, default=0)
 	streak: Mapped[int] = mapped_column(Integer, default=0)

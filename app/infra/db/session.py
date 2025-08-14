@@ -39,16 +39,14 @@ def init_db() -> None:
 	# Lightweight migration for SQLite
 	if _is_sqlite:
 		with engine.begin() as conn:
-			conn.execute(text("""
-				CREATE TABLE IF NOT EXISTS _m (id INTEGER PRIMARY KEY);
-			"""))
-			# Try adding column if not exists
-			conn.execute(text("""
-				PRAGMA table_info(exercises);
-			"""))
+			# add exercises.equipment
 			cols = [row[1] for row in conn.exec_driver_sql("PRAGMA table_info(exercises)").fetchall()]
 			if "equipment" not in cols:
 				conn.execute(text("ALTER TABLE exercises ADD COLUMN equipment VARCHAR(16) DEFAULT 'gym';"))
+			# add users.training_goal
+			cols_u = [row[1] for row in conn.exec_driver_sql("PRAGMA table_info(users)").fetchall()]
+			if "training_goal" not in cols_u:
+				conn.execute(text("ALTER TABLE users ADD COLUMN training_goal VARCHAR(32);"))
 
 
 @contextmanager

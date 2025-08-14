@@ -5,13 +5,27 @@ from sqlalchemy.orm import Session
 
 from app.infra.db.session import get_session
 from app.domain.services.catalog_service import CatalogService, MUSCLE_GROUPS
+from app.domain.services.workouts_service import WorkoutsService
 
 router = Router(name=__name__)
+
+GOALS = ["Похудеть", "Набор массы", "Сушка", "Поддерживать форму"]
 
 
 @router.callback_query(F.data.startswith("prog:level:"))
 async def pick_level(call: CallbackQuery) -> None:
 	level = call.data.split(":", 2)[2]
+	# Для уровней novice/advanced/pro — сначала спрашиваем цель
+	if level in ("novice", "advanced", "pro"):
+		kb = InlineKeyboardBuilder()
+		for g in GOALS:
+			kb.button(text=g, callback_data=f"prog:setgoal:{level}:{g}")
+		kb.adjust(2)
+		await call.message.edit_text("Выберите вашу цель тренировки:")
+		await call.message.edit_reply_markup(reply_markup=kb.as_markup())
+		await call.answer()
+		return
+	# Иначе сразу к типу
 	kb = InlineKeyboardBuilder()
 	kb.button(text="Сплит", callback_data=f"prog:type:split:{level}")
 	kb.button(text="Дом", callback_data=f"prog:type:home:{level}")
@@ -19,6 +33,25 @@ async def pick_level(call: CallbackQuery) -> None:
 	kb.button(text="Зал", callback_data=f"prog:type:gym:{level}")
 	kb.adjust(2)
 	await call.message.edit_text("Выберите тип программы")
+	await call.message.edit_reply_markup(reply_markup=kb.as_markup())
+	await call.answer()
+
+
+@router.callback_query(F.data.startswith("prog:setgoal:"))
+async def set_goal(call: CallbackQuery, lang: str) -> None:
+	_, _, level, goal = call.data.split(":", 3)
+	with get_session() as session:  # type: Session
+		service = WorkoutsService(session)
+		user = service.ensure_user(tg_id=call.from_user.id, language=lang)
+		user.training_goal = goal
+		session.commit()
+	kb = InlineKeyboardBuilder()
+	kb.button(text="Сплит", callback_data=f"prog:type:split:{level}")
+	kb.button(text="Дом", callback_data=f"prog:type:home:{level}")
+	kb.button(text="Улица", callback_data=f"prog:type:street:{level}")
+	kb.button(text="Зал", callback_data=f"prog:type:gym:{level}")
+	kb.adjust(2)
+	await call.message.edit_text(f"Цель сохранена: {goal}. Теперь выберите тип программы:")
 	await call.message.edit_reply_markup(reply_markup=kb.as_markup())
 	await call.answer()
 
@@ -72,7 +105,6 @@ async def show_program_detail(call: CallbackQuery) -> None:
 		exs = session.scalars(select(Exercise).where(Exercise.id.in_(ex_ids))).all()
 		prog = session.get(WorkoutProgram, program_id)
 	kb = InlineKeyboardBuilder()
-	# Выбор сложности
 	for diff in ["Лёгкая", "Средняя", "Сложная"]:
 		kb.button(text=diff, callback_data=f"prog:diff:{program_id}:{level}:{type_}:{diff}")
 	kb.adjust(3)
@@ -87,7 +119,7 @@ async def choose_goal_and_weights(call: CallbackQuery) -> None:
 	_, _, pid, level, type_, diff = call.data.split(":", 5)
 	program_id = int(pid)
 	kb = InlineKeyboardBuilder()
-	for goal in ["Похудеть", "Набор массы", "Сушка", "Поддерживать форму"]:
+	for goal in GOALS:
 		kb.button(text=goal, callback_data=f"prog:goal:{program_id}:{level}:{type_}:{diff}:{goal}")
 	kb.adjust(2)
 	await call.message.edit_text("Выберите цель тренировки:")
@@ -96,7 +128,6 @@ async def choose_goal_and_weights(call: CallbackQuery) -> None:
 
 
 def _weight_hint(diff: str, goal: str) -> str:
-	# Простая эвристика: % от 1ПМ (one-rep max) — пользователь без теста: даём ориентир в РПЕ
 	base = {
 		"Лёгкая": "РПЕ 6–7 (~60–70% от 1ПМ)",
 		"Средняя": "РПЕ 7–8 (~70–80% от 1ПМ)",
@@ -114,7 +145,6 @@ def _weight_hint(diff: str, goal: str) -> str:
 @router.callback_query(F.data.startswith("prog:goal:"))
 async def show_weights(call: CallbackQuery) -> None:
 	_, _, pid, level, type_, diff, goal = call.data.split(":", 6)
-	# Здесь можно сохранить выбор пользователя в БД (опущено для краткости)
 	hint = _weight_hint(diff, goal)
 	await call.message.edit_text(f"Сложность: {diff}\nЦель: {goal}\n{hint}")
 	await call.message.edit_reply_markup(reply_markup=None)
