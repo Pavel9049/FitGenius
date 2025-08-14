@@ -21,10 +21,11 @@ class Settings(BaseSettings):
 	log_level: str = Field(default="INFO", alias="LOG_LEVEL")
 
 	# Animations
-	animation_style: str = Field(default="fade", alias="ANIM_STYLE")  # fade|dots|blocks|dissolve|wipe|blink|none
+	animation_style: str = Field(default="fade", alias="ANIM_STYLE")  # fade|ultra|dots|blocks|dissolve|wipe|blink|none
 	animation_frame_ms: int = Field(default=100, alias="ANIM_FRAME_MS")
 	animation_total_ms: int = Field(default=1600, alias="ANIM_TOTAL_MS")
 	animation_max_frames: int = Field(default=24, alias="ANIM_MAX_FRAMES")
+	animation_behavior: str = Field(default="delete_then_send", alias="ANIM_BEHAVIOR")  # edit|delete_then_send
 
 
 @lru_cache

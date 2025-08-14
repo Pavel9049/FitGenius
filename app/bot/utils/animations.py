@@ -28,12 +28,10 @@ def _gen_fade_frames(text: str, frames: int) -> list[str]:
 
 
 def _gen_ultra_fade_frames(text: str, frames: int, seed: int) -> list[str]:
-	# Плавное растворение: на каждом шаге случайно «гасим» часть символов по всему тексту
 	if frames <= 1:
 		return [""]
 	rnd = random.Random(seed)
 	indices = list(range(len(text)))
-	# Фиксируем случайный порядок «гашения» символов, чтобы кадры были стабильны
 	rnd.shuffle(indices)
 	frames_out: list[str] = []
 	for i in range(frames):
@@ -43,9 +41,8 @@ def _gen_ultra_fade_frames(text: str, frames: int, seed: int) -> list[str]:
 		chars = list(text)
 		for idx in hide_set:
 			c = chars[idx]
-			# сохраняем переводы строк, остальное заменяем узким пробелом для мягкого затухания
 			if c not in ("\n", "\r"):
-				chars[idx] = "\u2009"  # thin space
+				chars[idx] = "\u2009"
 		frame = "".join(chars)
 		frames_out.append(frame)
 	return frames_out
@@ -55,6 +52,7 @@ async def evaporate_and_edit(message: Message, new_text: str, reply_markup=None)
 	settings = get_settings()
 	style_key = settings.animation_style
 	frame_delay = max(0, settings.animation_frame_ms) / 1000.0
+	behavior = settings.animation_behavior
 	try:
 		await message.edit_reply_markup(reply_markup=None)
 	except Exception:
@@ -80,4 +78,14 @@ async def evaporate_and_edit(message: Message, new_text: str, reply_markup=None)
 				await asyncio.sleep(frame_delay)
 	except Exception:
 		pass
+	# Если задан режим «удалить и отправить», удаляем старое сообщение и шлём новое
+	if behavior == "delete_then_send":
+		try:
+			await message.delete()
+		except Exception:
+			pass
+		# Отправляем новое сообщение от имени бота (родительский чат и поток/ответ — в простом виде)
+		await message.answer(new_text, reply_markup=reply_markup)
+		return
+	# Иначе просто редактируем
 	await message.edit_text(new_text, reply_markup=reply_markup)
