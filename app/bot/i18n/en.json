@@ -1,0 +1,6 @@
+{
+	"start": "Hi! I'm MyFitnessBot. Choose a language to get started. Commands: /help",
+	"help": "Available commands:\n/start — start\n/help — help\n/lang — language",
+	"choose_language": "Choose your language",
+	"language_changed": "Language switched to: {language}"
+}

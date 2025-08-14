@@ -1,0 +1,6 @@
+{
+	"start": "Привет! Я MyFitnessBot. Выбери язык и начнём. Команды: /help",
+	"help": "Доступные команды:\n/start — начало\n/help — помощь\n/lang — язык",
+	"choose_language": "Выберите язык",
+	"language_changed": "Язык переключен на: {language}"
+}

@@ -7,6 +7,8 @@ from aiogram.enums import ParseMode
 
 from app.core.config import get_settings
 from app.bot.routers import auth as auth_router
+from app.bot.routers import lang as lang_router
+from app.bot.middlewares.locale import LocaleMiddleware
 
 
 async def main() -> None:
@@ -17,7 +19,10 @@ async def main() -> None:
 		default=DefaultBotProperties(parse_mode=ParseMode.HTML),
 	)
 	dp = Dispatcher()
+	dp.message.middleware(LocaleMiddleware())
+	dp.callback_query.middleware(LocaleMiddleware())
 	dp.include_router(auth_router.router)
+	dp.include_router(lang_router.router)
 	await dp.start_polling(bot)
 
 
