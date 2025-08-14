@@ -18,9 +18,14 @@ async def evaporate_and_edit(message: Message, new_text: str, reply_markup=None)
 	style = _STYLES.get(settings.animation_style, _STYLES["dots"])  # type: ignore[arg-type]
 	frame_delay = max(0, settings.animation_frame_ms) / 1000.0
 	try:
+		# Сначала убираем клавиатуру, чтобы исключить повторные клики
+		await message.edit_reply_markup(reply_markup=None)
+	except Exception:
+		pass
+	try:
 		for frame in style:
 			cur = frame if frame else ""
-			await message.edit_text(cur or " ")
+			await message.edit_text(cur or " ", reply_markup=None)
 			await asyncio.sleep(frame_delay)
 	except Exception:
 		pass
