@@ -18,4 +18,4 @@ class Payment(Base):
 	currency: Mapped[str] = mapped_column(String(8), default="RUB")
 	status: Mapped[str] = mapped_column(String(16), default="succeeded")
 	created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
-	metadata: Mapped[str | None] = mapped_column(String(500), nullable=True)
+	meta_json: Mapped[str | None] = mapped_column(String(500), nullable=True)
