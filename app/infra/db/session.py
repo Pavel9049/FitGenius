@@ -47,6 +47,12 @@ def init_db() -> None:
 			cols_u = [row[1] for row in conn.exec_driver_sql("PRAGMA table_info(users)").fetchall()]
 			if "training_goal" not in cols_u:
 				conn.execute(text("ALTER TABLE users ADD COLUMN training_goal VARCHAR(32);"))
+			# add program_exercises.sets_desc/rest_desc
+			cols_pe = [row[1] for row in conn.exec_driver_sql("PRAGMA table_info(program_exercises)").fetchall()]
+			if "sets_desc" not in cols_pe:
+				conn.execute(text("ALTER TABLE program_exercises ADD COLUMN sets_desc VARCHAR(64);"))
+			if "rest_desc" not in cols_pe:
+				conn.execute(text("ALTER TABLE program_exercises ADD COLUMN rest_desc VARCHAR(64);"))
 
 
 @contextmanager
