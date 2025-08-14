@@ -4,5 +4,8 @@
 	"choose_language": "Choose your language",
 	"language_changed": "Language switched to: {language}",
 	"workout_start": "Go! Do your exercises and send /done when finished.",
-	"workout_done": "Great! Awarded XP: {xp}, stars: {stars}."
+	"workout_done": "Great! Awarded XP: {xp}, stars: {stars}.",
+	"menu_welcome": "Welcome! Choose an action below:",
+	"trial_activated": "Trial activated for 24 hours. Go choose programs.",
+	"trial_already": "Trial already used"
 }

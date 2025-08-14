@@ -4,5 +4,8 @@
 	"choose_language": "Elige tu idioma",
 	"language_changed": "Idioma cambiado a: {language}",
 	"workout_start": "¡Vamos! Realiza los ejercicios y envía /done al terminar.",
-	"workout_done": "¡Genial! Ganaste XP: {xp}, estrellas: {stars}."
+	"workout_done": "¡Genial! Ganaste XP: {xp}, estrellas: {stars}.",
+	"menu_welcome": "¡Bienvenido! Elige una acción:",
+	"trial_activated": "Prueba activada por 24 horas. Elige programas.",
+	"trial_already": "Prueba ya usada"
 }
