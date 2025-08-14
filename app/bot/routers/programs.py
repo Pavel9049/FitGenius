@@ -8,6 +8,7 @@ from app.domain.services.catalog_service import CatalogService, MUSCLE_GROUPS
 from app.domain.services.workouts_service import WorkoutsService
 from app.bot.utils.animations import evaporate_and_edit
 from app.domain.services.banner_service import get_header
+from app.bot.utils.buttons import big_label
 
 router = Router(name=__name__)
 
@@ -20,18 +21,16 @@ async def pick_level(call: CallbackQuery) -> None:
 	if level in ("novice", "advanced", "pro"):
 		kb = InlineKeyboardBuilder()
 		for g in GOALS:
-			kb.button(text=g, callback_data=f"prog:setgoal:{level}:{g}")
-		kb.adjust(2)
-		header = get_header()
-		await evaporate_and_edit(call.message, f"{header}\nВыберите вашу цель тренировки:", reply_markup=kb.as_markup())
-		await call.answer()
-		return
+			kb.button(text=big_label(f"🎯 {g}"), callback_data=f"prog:setgoal:{level}:{g}")
+		kb.adjust(1)
+	header = get_header()
+	await evaporate_and_edit(call.message, f"{header}\nВыберите вашу цель тренировки:", reply_markup=kb.as_markup())
+	await call.answer()
+	return
 	kb = InlineKeyboardBuilder()
-	kb.button(text="Сплит", callback_data=f"prog:type:split:{level}")
-	kb.button(text="Дом", callback_data=f"prog:type:home:{level}")
-	kb.button(text="Улица", callback_data=f"prog:type:street:{level}")
-	kb.button(text="Зал", callback_data=f"prog:type:gym:{level}")
-	kb.adjust(2)
+	for t, code in [("Сплит", "split"), ("Дом", "home"), ("Улица", "street"), ("Зал", "gym")]:
+		kb.button(text=big_label(t), callback_data=f"prog:type:{code}:{level}")
+	kb.adjust(1)
 	header = get_header()
 	await evaporate_and_edit(call.message, f"{header}\nВыберите тип программы", reply_markup=kb.as_markup())
 	await call.answer()
@@ -71,8 +70,8 @@ async def pick_type(call: CallbackQuery) -> None:
 			"legs": "Ноги",
 			"forearms": "Предплечья",
 		}[mg]
-		kb.button(text=text, callback_data=f"prog:mg:{mg}:{type_}:{level}")
-	kb.adjust(2)
+		kb.button(text=big_label(text), callback_data=f"prog:mg:{mg}:{type_}:{level}")
+	kb.adjust(1)
 	header = get_header()
 	await evaporate_and_edit(call.message, f"{header}\nВыберите группу мышц", reply_markup=kb.as_markup())
 	await call.answer()
@@ -87,7 +86,7 @@ async def show_programs(call: CallbackQuery) -> None:
 		views = catalog.list_programs(level=level, type_=type_, muscle_group=mg)
 	kb = InlineKeyboardBuilder()
 	for pv in views[:10]:
-		kb.button(text=pv.program.name, callback_data=f"prog:show:{pv.program.id}:{level}:{type_}")
+		kb.button(text=big_label(pv.program.name), callback_data=f"prog:show:{pv.program.id}:{level}:{type_}")
 	kb.adjust(1)
 	header = get_header()
 	await evaporate_and_edit(call.message, f"{header}\nПрограммы для {mg} — {level}/{type_}", reply_markup=kb.as_markup())
@@ -132,8 +131,8 @@ async def show_program_detail(call: CallbackQuery) -> None:
 			lines.append(f"• {ex.name} (пресс)")
 		prog = session.get(WorkoutProgram, program_id)
 	kb = InlineKeyboardBuilder()
-	for diff in ["🔹 Лёгкая", "🔸 Средняя", "🔺 Сложная"]:
-		kb.button(text=diff + "  ⟶", callback_data=f"prog:diff:{program_id}:{level}:{type_}:{diff.split()[1]}")
+	for diff in ["Лёгкая", "Средняя", "Сложная"]:
+		kb.button(text=big_label(f"Сложность: {diff}"), callback_data=f"prog:diff:{program_id}:{level}:{type_}:{diff}")
 	kb.adjust(1)
 	header = get_header()
 	desc = f"{header}\n{prog.name}\nУпражнения:\n" + "\n".join(lines)
@@ -158,7 +157,7 @@ async def choose_goal_and_weights(call: CallbackQuery) -> None:
 			recs.append((row.exercise_id, w))
 	kb = InlineKeyboardBuilder()
 	for goal in GOALS:
-		kb.button(text=f"🎯 {goal}   ⟶", callback_data=f"prog:goal:{program_id}:{level}:{type_}:{diff}:{goal}")
+		kb.button(text=big_label(f"🎯 {goal}"), callback_data=f"prog:goal:{program_id}:{level}:{type_}:{diff}:{goal}")
 	kb.adjust(1)
 	header = get_header()
 	lines = []
