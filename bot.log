@@ -800,3 +800,6 @@ aiogram.exceptions.TelegramBadRequest: Telegram server says - Bad Request: messa
 INFO:aiogram.event:Update id=268029290 is handled. Duration 123 ms by bot id=8269244638
 INFO:aiogram.event:Update id=268029291 is handled. Duration 311 ms by bot id=8269244638
 INFO:aiogram.event:Update id=268029292 is handled. Duration 316 ms by bot id=8269244638
+INFO:aiogram.event:Update id=268029293 is handled. Duration 516 ms by bot id=8269244638
+INFO:aiogram.event:Update id=268029294 is handled. Duration 128 ms by bot id=8269244638
+INFO:aiogram.event:Update id=268029295 is handled. Duration 333 ms by bot id=8269244638
