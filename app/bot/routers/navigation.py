@@ -1,6 +1,6 @@
 from aiogram import Router, F
 from aiogram.filters import CommandStart
-from aiogram.types import Message, CallbackQuery
+from aiogram.types import Message, CallbackQuery, FSInputFile
 from sqlalchemy.orm import Session
 
 from app.bot.keyboards.main import main_menu_keyboard, levels_keyboard, types_keyboard
@@ -14,7 +14,7 @@ import os
 from app.infra.content.loader import import_workouts_dataset, import_splits_dataset
 from app.bot.utils.animations import evaporate_and_edit
 from app.domain.services.phrases_service import get_random_phrase
-from app.domain.services.banner_service import get_header, get_welcome_banner
+from app.domain.services.banner_service import get_header, get_welcome_banner, generate_banner_image
 
 router = Router(name=__name__)
 
@@ -57,8 +57,13 @@ async def start(message: Message, lang: str) -> None:
 		await message.delete()
 	except Exception:
 		pass
-	banner = get_welcome_banner()
-	msg = await message.answer(banner)
+	# Пытаемся отправить фото-баннер
+	photo_path = generate_banner_image()
+	try:
+		msg = await message.answer_photo(FSInputFile(str(photo_path)), caption="FitCode")
+	except Exception:
+		banner = get_welcome_banner()
+		msg = await message.answer(banner)
 	header = get_header()
 	await evaporate_and_edit(msg, f"{header}\nДобро пожаловать! Выберите действие ниже:", reply_markup=main_menu_keyboard(trial_available, has_active))
 
