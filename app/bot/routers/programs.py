@@ -132,9 +132,9 @@ async def show_program_detail(call: CallbackQuery) -> None:
 			lines.append(f"• {ex.name} (пресс)")
 		prog = session.get(WorkoutProgram, program_id)
 	kb = InlineKeyboardBuilder()
-	for diff in ["Лёгкая", "Средняя", "Сложная"]:
-		kb.button(text=diff, callback_data=f"prog:diff:{program_id}:{level}:{type_}:{diff}")
-	kb.adjust(3)
+	for diff in ["🔹 Лёгкая", "🔸 Средняя", "🔺 Сложная"]:
+		kb.button(text=diff + "  ⟶", callback_data=f"prog:diff:{program_id}:{level}:{type_}:{diff.split()[1]}")
+	kb.adjust(1)
 	header = get_header()
 	desc = f"{header}\n{prog.name}\nУпражнения:\n" + "\n".join(lines)
 	await evaporate_and_edit(call.message, desc + "\nВыберите сложность для подбора весов:", reply_markup=kb.as_markup())
@@ -145,12 +145,29 @@ async def show_program_detail(call: CallbackQuery) -> None:
 async def choose_goal_and_weights(call: CallbackQuery) -> None:
 	_, _, pid, level, type_, diff = call.data.split(":", 5)
 	program_id = int(pid)
+	with get_session() as session:
+		from sqlalchemy import select
+		from app.domain.models.program import ProgramExercise
+		from app.domain.models.user import User
+		service = WorkoutsService(session)
+		user = session.scalar(select(User).where(User.tg_id == call.from_user.id))
+		pe = session.scalars(select(ProgramExercise).where(ProgramExercise.program_id == program_id).order_by(ProgramExercise.order_index)).all()
+		recs = []
+		for row in pe:
+			w = service.suggest_weight(user, row.exercise_id, diff, user.training_goal or "Поддерживать форму")
+			recs.append((row.exercise_id, w))
 	kb = InlineKeyboardBuilder()
 	for goal in GOALS:
-		kb.button(text=goal, callback_data=f"prog:goal:{program_id}:{level}:{type_}:{diff}:{goal}")
-	kb.adjust(2)
+		kb.button(text=f"🎯 {goal}   ⟶", callback_data=f"prog:goal:{program_id}:{level}:{type_}:{diff}:{goal}")
+	kb.adjust(1)
 	header = get_header()
-	await evaporate_and_edit(call.message, f"{header}\nВыберите цель тренировки:", reply_markup=kb.as_markup())
+	lines = []
+	for (ex_id, w) in recs[:6]:
+		if w is None:
+			lines.append("• Вес: по РПЕ 6–8 (нет данных)")
+		else:
+			lines.append(f"• Реком. вес: {w} кг")
+	await evaporate_and_edit(call.message, f"{header}\nСложность: {diff}\nПредварительный подбор весов:\n" + "\n".join(lines) + "\nВыберите цель для уточнения:", reply_markup=kb.as_markup())
 	await call.answer()
 
 

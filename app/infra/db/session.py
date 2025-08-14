@@ -35,6 +35,7 @@ def init_db() -> None:
 	from app.domain.models import payment as _  # noqa: F401
 	from app.domain.models import goal as _  # noqa: F401
 	from app.domain.models import photo_report as _  # noqa: F401
+	from app.domain.models import user_exercise as _  # noqa: F401
 	Base.metadata.create_all(bind=engine)
 	# Lightweight migration for SQLite
 	if _is_sqlite:
@@ -47,7 +48,7 @@ def init_db() -> None:
 			cols_u = [row[1] for row in conn.exec_driver_sql("PRAGMA table_info(users)").fetchall()]
 			if "training_goal" not in cols_u:
 				conn.execute(text("ALTER TABLE users ADD COLUMN training_goal VARCHAR(32);"))
-			# add program_exercises.sets_desc/rest_desc
+			# add program_exercises.sets_desc/rest_desc/tip_text
 			cols_pe = [row[1] for row in conn.exec_driver_sql("PRAGMA table_info(program_exercises)").fetchall()]
 			if "sets_desc" not in cols_pe:
 				conn.execute(text("ALTER TABLE program_exercises ADD COLUMN sets_desc VARCHAR(64);"))
@@ -55,6 +56,8 @@ def init_db() -> None:
 				conn.execute(text("ALTER TABLE program_exercises ADD COLUMN rest_desc VARCHAR(64);"))
 			if "tip_text" not in cols_pe:
 				conn.execute(text("ALTER TABLE program_exercises ADD COLUMN tip_text VARCHAR(200);"))
+			# ensure user_exercise_profiles exists
+			conn.exec_driver_sql("CREATE TABLE IF NOT EXISTS user_exercise_profiles (id INTEGER PRIMARY KEY AUTOINCREMENT, user_id INTEGER NOT NULL, exercise_id INTEGER NOT NULL, estimated_1rm REAL, last_work_weight REAL, last_reps INTEGER, updated_at TEXT, UNIQUE(user_id, exercise_id))")
 
 
 @contextmanager
