@@ -17,34 +17,56 @@ TYPES = ["split", "home", "street", "gym"]
 EXERCISE_POOL: dict[str, list[str]] = {
 	"back": [
 		"Тяга верхнего блока", "Тяга горизонтального блока", "Подтягивания", "Тяга штанги в наклоне",
-		"Гиперэкстензия", "Пуловер", "Тяга Т-грифа", "Тяга гантели в наклоне",
-		"Тяга штанги к подбородку", "Обратные отжимания на брусьях",
+		"Пуловер", "Тяга Т-грифа", "Тяга гантели в наклоне", "Шраги со штангой",
+		"Тяга гантелей к поясу", "Гиперэкстензия на тренажёре", "Пуллдаун узким хватом",
+		"Тяга каната к груди", "Подтягивания обратным хватом", "Пуллдаун за голову", "Пуллдаун нейтральным хватом",
 	],
 	"biceps": [
 		"Подъём штанги стоя", "Подъём гантелей сидя", "Молотки", "Концентрированный подъём",
 		"Подъём на скамье Скотта", "Подъём EZ-штанги", "Зоттман", "Подъём гантелей на наклонной",
-		"Подъём на блоке", "Обратные сгибания",
+		"Подъём на блоке", "Обратные сгибания", "Подъём штанги сидя", "Молотки на наклонной",
+		"Подъём на верёвке", "Кёрл в кроссовере", "Подъём гантелей по очереди",
 	],
 	"triceps": [
 		"Жим узким хватом", "Французский жим", "Разгибания на блоке", "Отжимания на брусьях",
 		"Разгибания с гантелью из-за головы", "Кикбэки", "Алмазные отжимания", "Жим гантелей лёжа",
-		"Жим в Смите узким хватом", "Разгибания на канате",
+		"Жим в Смите узким хватом", "Разгибания на канате", "Отжимания узким хватом",
+		"Разгибания обратным хватом", "Жим Т-грифа узким хватом", "Жим в машине узким хватом", "Жим с паузой узким хватом",
 	],
 	"shoulders": [
 		"Жим штанги стоя", "Жим гантелей сидя", "Махи в стороны", "Тяга к подбородку",
 		"Обратные махи", "Махи вперёд", "Арнольд-пресс", "Жим в тренажёре",
-		"Подъём гантелей через стороны наклонившись", "Жим гантелей стоя",
+		"Подъём гантелей через стороны наклонившись", "Жим гантелей стоя", "Разведение в тренажёре",
+		"Жим штанги из-за головы", "Подъём штанги перед собой", "Махи в кроссовере", "ЙТВ-расводки",
 	],
 	"legs": [
 		"Приседания со штангой", "Выпады", "Жим ногами", "Разгибания ног", "Сгибания ног",
 		"Румынская тяга", "Гакк-присед", "Болгарские выпады", "Подъём на носки стоя", "Гиперэкстензия",
+		"Фронтальные приседания", "Сумо-тяга", "Пистолетик", "Ягодичный мост", "Спринты на дорожке",
 	],
 	"forearms": [
 		"Сгибания запястий со штангой", "Разгибания запястий", "Фермерская прогулка", "Подъём на пальцы",
 		"Сгибания с гантелями сидя", "Скручивание полотенца", "Обратный хват штанги", "Вис на турнике",
-		"Молотки обратным хватом", "Катание штанги о пальцы",
+		"Молотки обратным хватом", "Катание штанги о пальцы", "Роллер для предплечий", "Сжатие эспандера",
+		"Сгибания с эспандером", "Вращение гантели", "Пронация/супинация с гантелью",
 	],
 }
+
+LEVEL_RU = {
+	"beginner": "Начинающий",
+	"novice": "Новичок",
+	"advanced": "Продвинутый",
+	"pro": "Профессионал",
+}
+
+TYPE_RU = {
+	"split": "Сплит",
+	"home": "Дом",
+	"street": "Улица",
+	"gym": "Зал",
+}
+
+COUNT_BY_LEVEL = {"beginner": 5, "novice": 7, "advanced": 10, "pro": 15}
 
 
 @dataclass
@@ -68,32 +90,35 @@ class CatalogService:
 		self.session.commit()
 
 	def _seed_splits_for_level(self, level: str) -> None:
-		# 5 сплит-программ, по 3 упражнения на каждую группу
+		# 5 сплит-программ, по 3 упражнения на каждую группу; без повторений между сплитами
+		mg_used: dict[str, set[int]] = {mg: set() for mg in MUSCLE_GROUPS}
 		for idx in range(1, 6):
-			program = WorkoutProgram(level=level, type="split", name=f"Сплит {idx} — {level}")
+			program = WorkoutProgram(level=level, type="split", name=f"{TYPE_RU['split']} {idx} — {LEVEL_RU[level]}")
 			self.session.add(program)
 			self.session.flush()
-			# Для каждой группы мышц подбираем 3 уникальных упражнения
 			for mg in MUSCLE_GROUPS:
 				pool = self.session.scalars(select(Exercise).where(Exercise.muscle_group == mg)).all()
-				used_ids: set[int] = set()
-				for k in range(3):
-					ex = next(e for e in pool if e.id not in used_ids)
-					used_ids.add(ex.id)
-					self.session.add(ProgramExercise(program_id=program.id, exercise_id=ex.id, order_index=k))
+				selected = 0
+				for ex in pool:
+					if ex.id in mg_used[mg]:
+						continue
+					self.session.add(ProgramExercise(program_id=program.id, exercise_id=ex.id, order_index=selected))
+					mg_used[mg].add(ex.id)
+					selected += 1
+					if selected >= 3:
+						break
 		self.session.commit()
 
 	def _seed_block_for_level_and_type(self, level: str, t: str) -> None:
-		# Для типов home/street/gym: по 10 упражнений на каждую группу мышц
+		# По COUNT_BY_LEVEL упражнений на каждую группу
 		for mg in MUSCLE_GROUPS:
-			program = WorkoutProgram(level=level, type=t, name=f"{t}:{mg}:{level}")
+			program = WorkoutProgram(level=level, type=t, name=f"{TYPE_RU[t]}: {LEVEL_RU[level]} — {mg}")
 			self.session.add(program)
 			self.session.flush()
 			pool = self.session.scalars(select(Exercise).where(Exercise.muscle_group == mg)).all()
-			idx = 0
-			for ex in pool[:10]:
+			limit = COUNT_BY_LEVEL[level]
+			for idx, ex in enumerate(pool[:limit]):
 				self.session.add(ProgramExercise(program_id=program.id, exercise_id=ex.id, order_index=idx))
-				idx += 1
 		self.session.commit()
 
 	def seed_all(self) -> None:
