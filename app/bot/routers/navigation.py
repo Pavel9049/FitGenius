@@ -12,6 +12,7 @@ from sqlalchemy import select
 
 import os
 from app.infra.content.loader import import_workouts_dataset, import_splits_dataset
+from app.bot.utils.animations import evaporate_and_edit
 
 router = Router(name=__name__)
 
@@ -54,10 +55,8 @@ async def start(message: Message, lang: str) -> None:
 		await message.delete()
 	except Exception:
 		pass
-	await message.answer(
-		"Добро пожаловать! Выберите действие ниже:",
-		reply_markup=main_menu_keyboard(trial_available, has_active),
-	)
+	msg = await message.answer("…")
+	await evaporate_and_edit(msg, "Добро пожаловать! Выберите действие ниже:", reply_markup=main_menu_keyboard(trial_available, has_active))
 
 
 @router.callback_query(F.data == "start:terms")
@@ -69,8 +68,7 @@ async def cb_terms(call: CallbackQuery, lang: str) -> None:
 		text = "Пользовательское соглашение временно недоступно."
 	if len(text) > 3500:
 		text = text[:3500] + "\n..."
-	await call.message.edit_text(text)
-	await call.message.edit_reply_markup(reply_markup=None)
+	await evaporate_and_edit(call.message, text)
 	await call.answer()
 
 
@@ -85,34 +83,29 @@ async def cb_trial(call: CallbackQuery, lang: str) -> None:
 		except ValueError:
 			await call.answer("Триал уже использован", show_alert=True)
 			return
-	await call.message.edit_text("Триал активирован на 24 часа. Перейдите к выбору программ.")
-	await call.message.edit_reply_markup(reply_markup=None)
+	await evaporate_and_edit(call.message, "Триал активирован на 24 часа. Перейдите к выбору программ.")
 	await call.answer()
 
 
 @router.callback_query(F.data == "start:programs")
 async def cb_programs(call: CallbackQuery) -> None:
-	await call.message.edit_text("Выберите уровень")
-	await call.message.edit_reply_markup(reply_markup=levels_keyboard())
+	await evaporate_and_edit(call.message, "Выберите уровень", reply_markup=levels_keyboard())
 	await call.answer()
 
 
 @router.callback_query(F.data == "start:pay")
 async def cb_pay(call: CallbackQuery) -> None:
-	await call.message.edit_text("Выберите план в /plans или используйте кнопки оплаты в следующей версии.")
-	await call.message.edit_reply_markup(reply_markup=None)
+	await evaporate_and_edit(call.message, "Выберите план в /plans или используйте кнопки оплаты в следующей версии.")
 	await call.answer()
 
 
 @router.callback_query(F.data == "start:profile")
 async def cb_profile(call: CallbackQuery) -> None:
-	await call.message.edit_text("Профиль и прогресс появятся здесь.")
-	await call.message.edit_reply_markup(reply_markup=None)
+	await evaporate_and_edit(call.message, "Профиль и прогресс появятся здесь.")
 	await call.answer()
 
 
 @router.callback_query(F.data == "start:help")
 async def cb_help(call: CallbackQuery) -> None:
-	await call.message.edit_text("Нажмите 'Выбрать программу' для каталога. Для доступа — активируйте триал или оплатите.")
-	await call.message.edit_reply_markup(reply_markup=None)
+	await evaporate_and_edit(call.message, "Нажмите 'Выбрать программу' для каталога. Для доступа — активируйте триал или оплатите.")
 	await call.answer()
