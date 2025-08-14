@@ -61,6 +61,8 @@ async def pick_type(call: CallbackQuery) -> None:
 	_, _, type_, level = call.data.split(":", 3)
 	kb = InlineKeyboardBuilder()
 	for mg in MUSCLE_GROUPS:
+		if mg == "core":
+			continue
 		text = {
 			"back": "Спина",
 			"biceps": "Бицепс",
@@ -68,7 +70,6 @@ async def pick_type(call: CallbackQuery) -> None:
 			"shoulders": "Плечи",
 			"legs": "Ноги",
 			"forearms": "Предплечья",
-			"core": "Пресс",
 		}[mg]
 		kb.button(text=text, callback_data=f"prog:mg:{mg}:{type_}:{level}")
 	kb.adjust(2)
@@ -93,6 +94,9 @@ async def show_programs(call: CallbackQuery) -> None:
 	await call.answer()
 
 
+_CORE_LIMIT = {"beginner": 3, "novice": 4, "advanced": 5, "pro": 6}
+
+
 @router.callback_query(F.data.startswith("prog:show:"))
 async def show_program_detail(call: CallbackQuery) -> None:
 	_, _, pid, level, type_ = call.data.split(":", 4)
@@ -104,12 +108,23 @@ async def show_program_detail(call: CallbackQuery) -> None:
 		pe = session.scalars(select(ProgramExercise).where(ProgramExercise.program_id == program_id).order_by(ProgramExercise.order_index)).all()
 		ex_ids = [x.exercise_id for x in pe]
 		exs = session.scalars(select(Exercise).where(Exercise.id.in_(ex_ids))).all()
+		# Добавляем упражнения на пресс автоматически
+		if type_ == "gym" or type_ == "split":
+			core_pool = session.scalars(select(Exercise).where(Exercise.muscle_group == "core", Exercise.equipment == "gym")).all()
+		else:
+			core_pool = session.scalars(select(Exercise).where(Exercise.muscle_group == "core", Exercise.equipment == "bodyweight")).all()
+		limit = _CORE_LIMIT.get(level, 3)
+		core_add = core_pool[:limit]
+		exs_extended = exs + core_add
 		prog = session.get(WorkoutProgram, program_id)
 	kb = InlineKeyboardBuilder()
 	for diff in ["Лёгкая", "Средняя", "Сложная"]:
 		kb.button(text=diff, callback_data=f"prog:diff:{program_id}:{level}:{type_}:{diff}")
 	kb.adjust(3)
-	desc = f"{prog.name}\nУпражнения:\n" + "\n".join(f"• {ex.name}" for ex in exs)
+	desc_lines = [f"{prog.name}", "Упражнения:"] + [f"• {ex.name}" for ex in exs_extended]
+	desc_lines.append("")
+	desc_lines.append("(Автоматически добавлено: упражнения на пресс)")
+	desc = "\n".join(desc_lines)
 	await call.message.edit_text(desc + "\nВыберите сложность для подбора весов:")
 	await call.message.edit_reply_markup(reply_markup=kb.as_markup())
 	await call.answer()
