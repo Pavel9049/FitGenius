@@ -138,3 +138,12 @@ async def cb_help(call: CallbackQuery) -> None:
 	header = get_header()
 	await evaporate_and_edit(call.message, f"{header}\nНажмите 'Выбрать программу' для каталога. Для доступа — активируйте триал или оплатите.")
 	await call.answer()
+
+
+@router.callback_query(F.data == "start:phrases")
+async def cb_phrases(call: CallbackQuery, lang: str) -> None:
+	header = get_header()
+	phrases = [get_random_phrase(lang) for _ in range(3)]
+	text = f"{header}\nМотивация на сегодня:\n- {phrases[0]}\n- {phrases[1]}\n- {phrases[2]}"
+	await evaporate_and_edit(call.message, text)
+	await call.answer()

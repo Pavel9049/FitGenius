@@ -1,0 +1,406 @@
+{
+  "bot_name": "Fit‑Pro",
+  "currency": "RUB",
+  "levels": {
+    "Beginner": {
+      "price": 1050,
+      "difficulty_label": "Начинающий",
+      "training_categories": {
+        "back": [
+          {"name":"Beginner Back Pull‑1","video_url":"https://youtu.be/BeginnerBack1","location":"gym","level":"Beginner"},
+          {"name":"Beginner Back Pull‑2","video_url":"https://youtu.be/BeginnerBack2","location":"gym","level":"Beginner"},
+          {"name":"Beginner Back Pull‑3","video_url":"https://youtu.be/BeginnerBack3","location":"gym","level":"Beginner"},
+          {"name":"Beginner Back Pull‑4","video_url":"https://youtu.be/BeginnerBack4","location":"gym","level":"Beginner"},
+          {"name":"Beginner Back Pull‑5","video_url":"https://youtu.be/BeginnerBack5","location":"gym","level":"Beginner"}
+        ],
+        "biceps": [
+          {"name":"Beginner Biceps Curl‑1","video_url":"https://youtu.be/BeginnerBiceps1","location":"gym","level":"Beginner"},
+          {"name":"Beginner Biceps Curl‑2","video_url":"https://youtu.be/BeginnerBiceps2","location":"gym","level":"Beginner"},
+          {"name":"Beginner Biceps Curl‑3","video_url":"https://youtu.be/BeginnerBiceps3","location":"gym","level":"Beginner"},
+          {"name":"Beginner Biceps Curl‑4","video_url":"https://youtu.be/BeginnerBiceps4","location":"gym","level":"Beginner"},
+          {"name":"Beginner Biceps Curl‑5","video_url":"https://youtu.be/BeginnerBiceps5","location":"gym","level":"Beginner"}
+        ],
+        "triceps": [
+          {"name":"Beginner Triceps Press‑1","video_url":"https://youtu.be/BeginnerTriceps1","location":"gym","level":"Beginner"},
+          {"name":"Beginner Triceps Press‑2","video_url":"https://youtu.be/BeginnerTriceps2","location":"gym","level":"Beginner"},
+          {"name":"Beginner Triceps Press‑3","video_url":"https://youtu.be/BeginnerTriceps3","location":"gym","level":"Beginner"},
+          {"name":"Beginner Triceps Press‑4","video_url":"https://youtu.be/BeginnerTriceps4","location":"gym","level":"Beginner"},
+          {"name":"Beginner Triceps Press‑5","video_url":"https://youtu.be/BeginnerTriceps5","location":"gym","level":"Beginner"}
+        ],
+        "shoulders": [
+          {"name":"Beginner Shoulder Press‑1","video_url":"https://youtu.be/BeginnerShoulder1","location":"gym","level":"Beginner"},
+          {"name":"Beginner Shoulder Press‑2","video_url":"https://youtu.be/BeginnerShoulder2","location":"gym","level":"Beginner"},
+          {"name":"Beginner Shoulder Press‑3","video_url":"https://youtu.be/BeginnerShoulder3","location":"gym","level":"Beginner"},
+          {"name":"Beginner Shoulder Press‑4","video_url":"https://youtu.be/BeginnerShoulder4","location":"gym","level":"Beginner"},
+          {"name":"Beginner Shoulder Press‑5","video_url":"https://youtu.be/BeginnerShoulder5","location":"gym","level":"Beginner"}
+        ],
+        "legs": [
+          {"name":"Beginner Leg Squat‑1","video_url":"https://youtu.be/BeginnerLeg1","location":"gym","level":"Beginner"},
+          {"name":"Beginner Leg Squat‑2","video_url":"https://youtu.be/BeginnerLeg2","location":"gym","level":"Beginner"},
+          {"name":"Beginner Leg Squat‑3","video_url":"https://youtu.be/BeginnerLeg3","location":"gym","level":"Beginner"},
+          {"name":"Beginner Leg Squat‑4","video_url":"https://youtu.be/BeginnerLeg4","location":"gym","level":"Beginner"},
+          {"name":"Beginner Leg Squat‑5","video_url":"https://youtu.be/BeginnerLeg5","location":"gym","level":"Beginner"}
+        ],
+        "forearms": [
+          {"name":"Beginner Forearm Curl‑1","video_url":"https://youtu.be/BeginnerForearm1","location":"gym","level":"Beginner"},
+          {"name":"Beginner Forearm Curl‑2","video_url":"https://youtu.be/BeginnerForearm2","location":"gym","level":"Beginner"},
+          {"name":"Beginner Forearm Curl‑3","video_url":"https://youtu.be/BeginnerForearm3","location":"gym","level":"Beginner"},
+          {"name":"Beginner Forearm Curl‑4","video_url":"https://youtu.be/BeginnerForearm4","location":"gym","level":"Beginner"},
+          {"name":"Beginner Forearm Curl‑5","video_url":"https://youtu.be/BeginnerForearm5","location":"gym","level":"Beginner"}
+        ]
+      },
+      "home_workouts_no_equipment": {
+        "back": [
+          {"name":"Superman","video_url":"https://youtu.be/HomeBack1","location":"home","level":"Beginner"},
+          {"name":"Reverse Snow Angel","video_url":"https://youtu.be/HomeBack2","location":"home","level":"Beginner"},
+          {"name":"Hip‑Hinge Good Morning","video_url":"https://youtu.be/HomeBack3","location":"home","level":"Beginner"},
+          {"name":"Doorway Row","video_url":"https://youtu.be/HomeBack4","location":"home","level":"Beginner"},
+          {"name":"Prone Y‑Raise","video_url":"https://youtu.be/HomeBack5","location":"home","level":"Beginner"},
+          {"name":"Cat‑Cow Stretch","video_url":"https://youtu.be/HomeBack6","location":"home","level":"Beginner"},
+          {"name":"Towel Pull‑Apart","video_url":"https://youtu.be/HomeBack7","location":"home","level":"Beginner"},
+          {"name":"Floor W‑Pull","video_url":"https://youtu.be/HomeBack8","location":"home","level":"Beginner"},
+          {"name":"Standing Band‑less Row","video_url":"https://youtu.be/HomeBack9","location":"home","level":"Beginner"},
+          {"name":"Back Extension on Chair","video_url":"https://youtu.be/HomeBack10","location":"home","level":"Beginner"}
+        ],
+        "biceps": [
+          {"name":"Towel Curl","video_url":"https://youtu.be/HomeBiceps1","location":"home","level":"Beginner"},
+          {"name":"Isometric Biceps Hold","video_url":"https://youtu.be/HomeBiceps2","location":"home","level":"Beginner"},
+          {"name":"Doorframe Curl","video_url":"https://youtu.be/HomeBiceps3","location":"home","level":"Beginner"},
+          {"name":"Body‑Weight Chin‑Up (Assisted)","video_url":"https://youtu.be/HomeBiceps4","location":"home","level":"Beginner"},
+          {"name":"Reverse Grip Push‑Up","video_url":"https://youtu.be/HomeBiceps5","location":"home","level":"Beginner"},
+          {"name":"Static Hold on Table Edge","video_url":"https://youtu.be/HomeBiceps6","location":"home","level":"Beginner"},
+          {"name":"Cross‑Body Towel Pull","video_url":"https://youtu.be/HomeBiceps7","location":"home","level":"Beginner"},
+          {"name":"Supine Biceps Curl (Floor)","video_url":"https://youtu.be/HomeBiceps8","location":"home","level":"Beginner"},
+          {"name":"Wall Biceps Press","video_url":"https://youtu.be/HomeBiceps9","location":"home","level":"Beginner"},
+          {"name":"Seated Towel Row (Biceps Focus)","video_url":"https://youtu.be/HomeBiceps10","location":"home","level":"Beginner"}
+        ],
+        "triceps": [
+          {"name":"Diamond Push‑Up","video_url":"https://youtu.be/HomeTriceps1","location":"home","level":"Beginner"},
+          {"name":"Bench Dips","video_url":"https://youtu.be/HomeTriceps2","location":"home","level":"Beginner"},
+          {"name":"Overhead Towel Extension","video_url":"https://youtu.be/HomeTriceps3","location":"home","level":"Beginner"},
+          {"name":"Close‑Grip Push‑Up","video_url":"https://youtu.be/HomeTriceps4","location":"home","level":"Beginner"},
+          {"name":"Triceps Isometric Hold (Wall)","video_url":"https://youtu.be/HomeTriceps5","location":"home","level":"Beginner"},
+          {"name":"Floor Press‑Down","video_url":"https://youtu.be/HomeTriceps6","location":"home","level":"Beginner"},
+          {"name":"Table Edge Extension","video_url":"https://youtu.be/HomeTriceps7","location":"home","level":"Beginner"},
+          {"name":"Reverse Push‑Up","video_url":"https://youtu.be/HomeTriceps8","location":"home","level":"Beginner"},
+          {"name":"Static Towel Press","video_url":"https://youtu.be/HomeTriceps9","location":"home","level":"Beginner"},
+          {"name":"Side‑Plank Triceps Reach","video_url":"https://youtu.be/HomeTriceps10","location":"home","level":"Beginner"}
+        ],
+        "shoulders": [
+          {"name":"Wall Angels","video_url":"https://youtu.be/HomeShoulder1","location":"home","level":"Beginner"},
+          {"name":"Pike Push‑Up","video_url":"https://youtu.be/HomeShoulder2","location":"home","level":"Beginner"},
+          {"name":"Arm Circles","video_url":"https://youtu.be/HomeShoulder3","location":"home","level":"Beginner"},
+          {"name":"Towel Front Raise","video_url":"https://youtu.be/HomeShoulder4","location":"home","level":"Beginner"},
+          {"name":"L‑Shape Plank","video_url":"https://youtu.be/HomeShoulder5","location":"home","level":"Beginner"},
+          {"name":"Scapular Push‑Up","video_url":"https://youtu.be/HomeShoulder6","location":"home","level":"Beginner"},
+          {"name":"Reverse Snow Angel","video_url":"https://youtu.be/HomeShoulder7","location":"home","level":"Beginner"},
+          {"name":"Towel Y‑Raise","video_url":"https://youtu.be/HomeShoulder8","location":"home","level":"Beginner"},
+          {"name":"Incline Wall Press","video_url":"https://youtu.be/HomeShoulder9","location":"home","level":"Beginner"},
+          {"name":"Hip‑Dips","video_url":"https://youtu.be/HomeShoulder10","location":"home","level":"Beginner"}
+        ],
+        "legs": [
+          {"name":"Body‑Weight Squat","video_url":"https://youtu.be/HomeLeg1","location":"home","level":"Beginner"},
+          {"name":"Alternating Lunge","video_url":"https://youtu.be/HomeLeg2","location":"home","level":"Beginner"},
+          {"name":"Glute Bridge","video_url":"https://youtu.be/HomeLeg3","location":"home","level":"Beginner"},
+          {"name":"Wall Sit","video_url":"https://youtu.be/HomeLeg4","location":"home","level":"Beginner"},
+          {"name":"Calf Raise (Stair)","video_url":"https://youtu.be/HomeLeg5","location":"home","level":"Beginner"},
+          {"name":"Step‑Up (Chair)","video_url":"https://youtu.be/HomeLeg6","location":"home","level":"Beginner"},
+          {"name":"Side‑Lying Leg Raise","video_url":"https://youtu.be/HomeLeg7","location":"home","level":"Beginner"},
+          {"name":"Single‑Leg Romanian Deadlift (Body‑Weight)","video_url":"https://youtu.be/HomeLeg8","location":"home","level":"Beginner"},
+          {"name":"Hip Thrust (Sofa)","video_url":"https://youtu.be/HomeLeg9","location":"home","level":"Beginner"},
+          {"name":"High Knees","video_url":"https://youtu.be/HomeLeg10","location":"home","level":"Beginner"}
+        ],
+        "forearms": [
+          {"name":"Towel Grip Hold","video_url":"https://youtu.be/HomeForearm1","location":"home","level":"Beginner"},
+          {"name":"Wrist Flexor Stretch","video_url":"https://youtu.be/HomeForearm2","location":"home","level":"Beginner"},
+          {"name":"Reverse Wrist Curl (Body‑Weight)","video_url":"https://youtu.be/HomeForearm3","location":"home","level":"Beginner"},
+          {"name":"Finger Push‑Ups","video_url":"https://youtu.be/HomeForearm4","location":"home","level":"Beginner"},
+          {"name":"Static Farmer’s Carry (Buckets)","video_url":"https://youtu.be/HomeForearm5","location":"home","level":"Beginner"},
+          {"name":"Plate Pinch (Books)","video_url":"https://youtu.be/HomeForearm6","location":"home","level":"Beginner"},
+          {"name":"Wrist Roller (Rope + Bag)","video_url":"https://youtu.be/HomeForearm7","location":"home","level":"Beginner"},
+          {"name":"Reverse Grip Push‑Up","video_url":"https://youtu.be/HomeForearm8","location":"home","level":"Beginner"},
+          {"name":"Side Wrist Stretch","video_url":"https://youtu.be/HomeForearm9","location":"home","level":"Beginner"},
+          {"name":"Palm‑Up/Down Holds","video_url":"https://youtu.be/HomeForearm10","location":"home","level":"Beginner"}
+        ]
+      },
+      "outdoor_workouts": {
+        "back": [
+          {"name":"Park Bench Row","video_url":"https://youtu.be/OutdoorBack1","location":"outdoor","level":"Beginner"},
+          {"name":"Tree Pull‑Ups (Assisted)","video_url":"https://youtu.be/OutdoorBack2","location":"outdoor","level":"Beginner"},
+          {"name":"Horizontal Bar Inverted Row","video_url":"https://youtu.be/OutdoorBack3","location":"outdoor","level":"Beginner"},
+          {"name":"Sandbag Good Morning","video_url":"https://youtu.be/OutdoorBack4","location":"outdoor","level":"Beginner"},
+          {"name":"Resistance Band Pull‑Apart (Park)","video_url":"https://youtu.be/OutdoorBack5","location":"outdoor","level":"Beginner"},
+          {"name":"Back Extension on Step","video_url":"https://youtu.be/OutdoorBack6","location":"outdoor","level":"Beginner"},
+          {"name":"Standing T‑Row (Band)","video_url":"https://youtu.be/OutdoorBack7","location":"outdoor","level":"Beginner"},
+          {"name":"Prone Snow Angel (Grass)","video_url":"https://youtu.be/OutdoorBack8","location":"outdoor","level":"Beginner"},
+          {"name":"Rope Pull‑Down (Tree)","video_url":"https://youtu.be/OutdoorBack9","location":"outdoor","level":"Beginner"},
+          {"name":"Resistance Band Face Pull","video_url":"https://youtu.be/OutdoorBack10","location":"outdoor","level":"Beginner"}
+        ],
+        "biceps": [
+          {"name":"Tree Curl (Band)","video_url":"https://youtu.be/OutdoorBiceps1","location":"outdoor","level":"Beginner"},
+          {"name":"Bench Chin‑Up (Assisted)","video_url":"https://youtu.be/OutdoorBiceps2","location":"outdoor","level":"Beginner"},
+          {"name":"Resistance Band Hammer Curl","video_url":"https://youtu.be/OutdoorBiceps3","location":"outdoor","level":"Beginner"},
+          {"name":"Grass Towel Curl","video_url":"https://youtu.be/OutdoorBiceps4","location":"outdoor","level":"Beginner"},
+          {"name":"Rock Grip Curl","video_url":"https://youtu.be/OutdoorBiceps5","location":"outdoor","level":"Beginner"},
+          {"name":"Backpack Biceps Curl","video_url":"https://youtu.be/OutdoorBiceps6","location":"outdoor","level":"Beginner"},
+          {"name":"Incline Bench Curl (Body‑Weight)","video_url":"https://youtu.be/OutdoorBiceps7","location":"outdoor","level":"Beginner"},
+          {"name":"Resistance Band Reverse Curl","video_url":"https://youtu.be/OutdoorBiceps8","location":"outdoor","level":"Beginner"},
+          {"name":"Standing Towel Curl","video_url":"https://youtu.be/OutdoorBiceps9","location":"outdoor","level":"Beginner"},
+          {"name":"Park Bench Isometric Hold","video_url":"https://youtu.be/OutdoorBiceps10","location":"outdoor","level":"Beginner"}
+        ],
+        "triceps": [
+          {"name":"Bench Dip (Feet on Ground)","video_url":"https://youtu.be/OutdoorTriceps1","location":"outdoor","level":"Beginner"},
+          {"name":"Tree Triceps Extension (Band)","video_url":"https://youtu.be/OutdoorTriceps2","location":"outdoor","level":"Beginner"},
+          {"name":"Resistance Band Push‑Down (Park)","video_url":"https://youtu.be/OutdoorTriceps3","location":"outdoor","level":"Beginner"},
+          {"name":"Close‑Grip Push‑Up on Grass","video_url":"https://youtu.be/OutdoorTriceps4","location":"outdoor","level":"Beginner"},
+          {"name":"Body‑Weight Overhead Triceps Press","video_url":"https://youtu.be/OutdoorTriceps5","location":"outdoor","level":"Beginner"},
+          {"name":"Sandbag Triceps Extension","video_url":"https://youtu.be/OutdoorTriceps6","location":"outdoor","level":"Beginner"},
+          {"name":"Bench Close‑Grip Press","video_url":"https://youtu.be/OutdoorTriceps7","location":"outdoor","level":"Beginner"},
+          {"name":"Tree‑Side Triceps Kickback (Band)","video_url":"https://youtu.be/OutdoorTriceps8","location":"outdoor","level":"Beginner"},
+          {"name":"Resistance Band Skullcrusher","video_url":"https://youtu.be/OutdoorTriceps9","location":"outdoor","level":"Beginner"},
+          {"name":"Grass Pike Press","video_url":"https://youtu.be/OutdoorTriceps10","location":"outdoor","level":"Beginner"}
+        ],
+        "shoulders": [
+          {"name":"Pike Push‑Up (Grass)","video_url":"https://youtu.be/OutdoorShoulder1","location":"outdoor","level":"Beginner"},
+          {"name":"Band Lateral Raise (Tree)","video_url":"https://youtu.be/OutdoorShoulder2","location":"outdoor","level":"Beginner"},
+          {"name":"Resistance Band Front Raise","video_url":"https://youtu.be/OutdoorShoulder3","location":"outdoor","level":"Beginner"},
+          {"name":"Wall Handstand Hold (Beginner)","video_url":"https://youtu.be/OutdoorShoulder4","location":"outdoor","level":"Beginner"},
+          {"name":"Bench Shoulder Tap Push‑Up","video_url":"https://youtu.be/OutdoorShoulder5","location":"outdoor","level":"Beginner"},
+          {"name":"Band Pull‑Apart (Park)","video_url":"https://youtu.be/OutdoorShoulder6","location":"outdoor","level":"Beginner"},
+          {"name":"Grass Y‑Raise (Band)","video_url":"https://youtu.be/OutdoorShoulder7","location":"outdoor","level":"Beginner"},
+          {"name":"Tree‑Side Band Rotations","video_url":"https://youtu.be/OutdoorShoulder8","location":"outdoor","level":"Beginner"},
+          {"name":"Elevated Push‑Up (Bench)","video_url":"https://youtu.be/OutdoorShoulder9","location":"outdoor","level":"Beginner"},
+          {"name":"Resistance Band Face Pull","video_url":"https://youtu.be/OutdoorShoulder10","location":"outdoor","level":"Beginner"}
+        ],
+        "legs": [
+          {"name":"Walking Lunge (Park Path)","video_url":"https://youtu.be/OutdoorLeg1","location":"outdoor","level":"Beginner"},
+          {"name":"Step‑Up on Bench","video_url":"https://youtu.be/OutdoorLeg2","location":"outdoor","level":"Beginner"},
+          {"name":"Hill Sprint (30 м)","video_url":"https://youtu.be/OutdoorLeg3","location":"outdoor","level":"Beginner"},
+          {"name":"Box Jump (Low)","video_url":"https://youtu.be/OutdoorLeg4","location":"outdoor","level":"Beginner"},
+          {"name":"Single‑Leg Calf Raise (Stair)","video_url":"https://youtu.be/OutdoorLeg5","location":"outdoor","level":"Beginner"},
+          {"name":"Glute Bridge on Grass","video_url":"https://youtu.be/OutdoorLeg6","location":"outdoor","level":"Beginner"},
+          {"name":"Side‑Lunge (Park)","video_url":"https://youtu.be/OutdoorLeg7","location":"outdoor","level":"Beginner"},
+          {"name":"Broad Jump (Grass)","video_url":"https://youtu.be/OutdoorLeg8","location":"outdoor","level":"Beginner"},
+          {"name":"Resistance Band Hamstring Curl (Tree)","video_url":"https://youtu.be/OutdoorLeg9","location":"outdoor","level":"Beginner"},
+          {"name":"Skater Hops","video_url":"https://youtu.be/OutdoorLeg10","location":"outdoor","level":"Beginner"}
+        ],
+        "forearms": [
+          {"name":"Towel Grip Hang (Tree Branch)","video_url":"https://youtu.be/OutdoorForearm1","location":"outdoor","level":"Beginner"},
+          {"name":"Band Wrist Curl (Park)","video_url":"https://youtu.be/OutdoorForearm2","location":"outdoor","level":"Beginner"},
+          {"name":"Rock Grip Hold","video_url":"https://youtu.be/OutdoorForearm3","location":"outdoor","level":"Beginner"},
+          {"name":"Grass Finger Push‑Up","video_url":"https://youtu.be/OutdoorForearm4","location":"outdoor","level":"Beginner"},
+          {"name":"Backpack Carry (Farmer’s Walk)","video_url":"https://youtu.be/OutdoorForearm5","location":"outdoor","level":"Beginner"},
+          {"name":"Resistance Band Reverse Wrist Curl","video_url":"https://youtu.be/OutdoorForearm6","location":"outdoor","level":"Beginner"},
+          {"name":"Tree‑Side Wrist Rotation (Band)","video_url":"https://youtu.be/OutdoorForearm7","location":"outdoor","level":"Beginner"},
+          {"name":"Bench Pinch Hold (Books)","video_url":"https://youtu.be/OutdoorForearm8","location":"outdoor","level":"Beginner"},
+          {"name":"Static Hand‑Over‑Hand Pull (Band)","video_url":"https://youtu.be/OutdoorForearm9","location":"outdoor","level":"Beginner"},
+          {"name":"Grass Wrist Roller (Rope + Small Bag)","video_url":"https://youtu.be/OutdoorForearm10","location":"outdoor","level":"Beginner"}
+        ]
+      }
+    },
+
+    "Novice": {
+      "price": 1750,
+      "difficulty_label": "Новичок",
+      "training_categories": {
+        "back": [
+          {"name":"Novice Back Pull‑1","video_url":"https://youtu.be/NoviceBack1","location":"gym","level":"Novice"},
+          {"name":"Novice Back Pull‑2","video_url":"https://youtu.be/NoviceBack2","location":"gym","level":"Novice"},
+          {"name":"Novice Back Pull‑3","video_url":"https://youtu.be/NoviceBack3","location":"gym","level":"Novice"},
+          {"name":"Novice Back Pull‑4","video_url":"https://youtu.be/NoviceBack4","location":"gym","level":"Novice"},
+          {"name":"Novice Back Pull‑5","video_url":"https://youtu.be/NoviceBack5","location":"gym","level":"Novice"}
+        ],
+        "biceps": [
+          {"name":"Novice Biceps Curl‑1","video_url":"https://youtu.be/NoviceBiceps1","location":"gym","level":"Novice"},
+          {"name":"Novice Biceps Curl‑2","video_url":"https://youtu.be/NoviceBiceps2","location":"gym","level":"Novice"},
+          {"name":"Novice Biceps Curl‑3","video_url":"https://youtu.be/NoviceBiceps3","location":"gym","level":"Novice"},
+          {"name":"Novice Biceps Curl‑4","video_url":"https://youtu.be/NoviceBiceps4","location":"gym","level":"Novice"},
+          {"name":"Novice Biceps Curl‑5","video_url":"https://youtu.be/NoviceBiceps5","location":"gym","level":"Novice"}
+        ],
+        "triceps": [
+          {"name":"Novice Triceps Press‑1","video_url":"https://youtu.be/NoviceTriceps1","location":"gym","level":"Novice"},
+          {"name":"Novice Triceps Press‑2","video_url":"https://youtu.be/NoviceTriceps2","location":"gym","level":"Новice"},
+          {"name":"Novice Triceps Press‑3","video_url":"https://youtu.be/NoviceTriceps3","location":"gym","level":"Novice"},
+          {"name":"Novice Triceps Press‑4","video_url":"https://youtu.be/NoviceTriceps4","location":"gym","level":"Novice"},
+          {"name":"Novice Triceps Press‑5","video_url":"https://youtu.be/NoviceTriceps5","location":"gym","level":"Novice"}
+        ],
+        "shoulders": [
+          {"name":"Novice Shoulder Press‑1","video_url":"https://youtu.be/NoviceShoulder1","location":"gym","level":"Novice"},
+          {"name":"Novice Shoulder Press‑2","video_url":"https://youtu.be/NoviceShoulder2","location":"gym","level":"Novice"},
+          {"name":"Novice Shoulder Press‑3","video_url":"https://youtu.be/NoviceShoulder3","location":"gym","level":"Novice"},
+          {"name":"Novice Shoulder Press‑4","video_url":"https://youtu.be/NoviceShoulder4","location":"gym","level":"Novice"},
+          {"name":"Novice Shoulder Press‑5","video_url":"https://youtu.be/NoviceShoulder5","location":"gym","level":"Novice"}
+        ],
+        "legs": [
+          {"name":"Novice Leg Squat‑1","video_url":"https://youtu.be/NoviceLeg1","location":"gym","level":"Novice"},
+          {"name":"Novice Leg Squat‑2","video_url":"https://youtu.be/NoviceLeg2","location":"gym","level":"Novice"},
+          {"name":"Novice Leg Squat‑3","video_url":"https://youtu.be/NoviceLeg3","location":"gym","level":"Novice"},
+          {"name":"Novice Leg Squat‑4","video_url":"https://youtu.be/NoviceLeg4","location":"gym","level":"Novice"},
+          {"name":"Novice Leg Squat‑5","video_url":"https://youtu.be/NoviceLeg5","location":"gym","level":"Novice"}
+        ],
+        "forearms": [
+          {"name":"Novice Forearm Curl‑1","video_url":"https://youtu.be/NoviceForearm1","location":"gym","level":"Novice"},
+          {"name":"Novice Forearm Curl‑2","video_url":"https://youtu.be/NoviceForearm2","location":"gym","level":"Novice"},
+          {"name":"Novice Forearm Curl‑3","video_url":"https://youtu.be/NoviceForearm3","location":"gym","level":"Novice"},
+          {"name":"Novice Forearm Curl‑4","video_url":"https://youtu.be/NoviceForearm4","location":"gym","level":"Novice"},
+          {"name":"Novice Forearm Curl‑5","video_url":"https://youtu.be/NoviceForearm5","location":"gym","level":"Novice"}
+        ]
+      },
+      "nutrition_menu_pp": [
+        {"dish_name":"Куриное филе с киноа и брокколи","calories_kcal":420,"protein_g":35,"fat_g":10,"carbs_g":45},
+        {"dish_name":"Омлет из 3 яиц с шпинатом и помидорами","calories_kcal":310,"protein_g":22,"fat_g":18,"carbs_g":5},
+        {"dish_name":"Тунец в собственном соку с гречкой и овощным салатом","calories_kcal":380,"protein_g":38,"fat_g":6,"carbs_g":45},
+        {"dish_name":"Говядина‑строганина с бататом и спаржей","calories_kcal":470,"protein_g":40,"fat_g":12,"carbs_g":55},
+        {"dish_name":"Протеиновый смузи (сыворотка, банан, миндальное молоко)","calories_kcal":250,"protein_g":30,"fat_g":5,"carbs_g":25}
+      ],
+      "home_workouts_no_equipment": {},
+      "outdoor_workouts": {}
+    },
+
+    "Advanced": {
+      "price": 2750,
+      "difficulty_label": "Продвинутый",
+      "training_categories": {
+        "back": [
+          {"name":"Advanced Back Pull‑1","video_url":"https://youtu.be/AdvancedBack1","location":"gym","level":"Advanced"},
+          {"name":"Advanced Back Pull‑2","video_url":"https://youtu.be/AdvancedBack2","location":"gym","level":"Advanced"},
+          {"name":"Advanced Back Pull‑3","video_url":"https://youtu.be/AdvancedBack3","location":"gym","level":"Advanced"},
+          {"name":"Advanced Back Pull‑4","video_url":"https://youtu.be/AdvancedBack4","location":"gym","level":"Advanced"},
+          {"name":"Advanced Back Pull‑5","video_url":"https://youtu.be/AdvancedBack5","location":"gym","level":"Advanced"}
+        ],
+        "biceps": [
+          {"name":"Advanced Biceps Curl‑1","video_url":"https://youtu.be/AdvancedBiceps1","location":"gym","level":"Advanced"},
+          {"name":"Advanced Biceps Curl‑2","video_url":"https://youtu.be/AdvancedBiceps2","location":"gym","level":"Advanced"},
+          {"name":"Advanced Biceps Curl‑3","video_url":"https://youtu.be/AdvancedBiceps3","location":"gym","level":"Advanced"},
+          {"name":"Advanced Biceps Curl‑4","video_url":"https://youtu.be/AdvancedBiceps4","location":"gym","level":"Advanced"},
+          {"name":"Advanced Biceps Curl‑5","video_url":"https://youtu.be/AdvancedBiceps5","location":"gym","level":"Advanced"}
+        ],
+        "triceps": [
+          {"name":"Advanced Triceps Press‑1","video_url":"https://youtu.be/AdvancedTriceps1","location":"gym","level":"Advanced"},
+          {"name":"Advanced Triceps Press‑2","video_url":"https://youtu.be/AdvancedTriceps2","location":"gym","level":"Advanced"},
+          {"name":"Advanced Triceps Press‑3","video_url":"https://youtu.be/AdvancedTriceps3","location":"gym","level":"Advanced"},
+          {"name":"Advanced Triceps Press‑4","video_url":"https://youtu.be/AdvancedTriceps4","location":"gym","level":"Advanced"},
+          {"name":"Advanced Triceps Press‑5","video_url":"https://youtu.be/AdvancedTriceps5","location":"gym","level":"Advanced"}
+        ],
+        "shoulders": [
+          {"name":"Advanced Shoulder Press‑1","video_url":"https://youtu.be/AdvancedShoulder1","location":"gym","level":"Advanced"},
+          {"name":"Advanced Shoulder Press‑2","video_url":"https://youtu.be/AdvancedShoulder2","location":"gym","level":"Advanced"},
+          {"name":"Advanced Shoulder Press‑3","video_url":"https://youtu.be/AdvancedShoulder3","location":"gym","level":"Advanced"},
+          {"name":"Advanced Shoulder Press‑4","video_url":"https://youtu.be/AdvancedShoulder4","location":"gym","level":"Advanced"},
+          {"name":"Advanced Shoulder Press‑5","video_url":"https://youtu.be/AdvancedShoulder5","location":"gym","level":"Advanced"}
+        ],
+        "legs": [
+          {"name":"Advanced Leg Squat‑1","video_url":"https://youtu.be/AdvancedLeg1","location":"gym","level":"Advanced"},
+          {"name":"Advanced Leg Squat‑2","video_url":"https://youtu.be/AdvancedLeg2","location":"gym","level":"Advanced"},
+          {"name":"Advanced Leg Squat‑3","video_url":"https://youtu.be/AdvancedLeg3","location":"gym","level":"Advanced"},
+          {"name":"Advanced Leg Squat‑4","video_url":"https://youtu.be/AdvancedLeg4","location":"gym","level":"Advanced"},
+          {"name":"Advanced Leg Squat‑5","video_url":"https://youtu.be/AdvancedLeg5","location":"gym","level":"Advanced"}
+        ],
+        "forearms": [
+          {"name":"Advanced Forearm Curl‑1","video_url":"https://youtu.be/AdvancedForearm1","location":"gym","level":"Advanced"},
+          {"name":"Advanced Forearm Curl‑2","video_url":"https://youtu.be/AdvancedForearm2","location":"gym","level":"Advanced"},
+          {"name":"Advanced Forearm Curl‑3","video_url":"https://youtu.be/AdvancedForearm3","location":"gym","level":"Advanced"},
+          {"name":"Advanced Forearm Curl‑4","video_url":"https://youtu.be/AdvancedForearm4","location":"gym","level":"Advanced"},
+          {"name":"Advanced Forearm Curl‑5","video_url":"https://youtu.be/AdvancedForearm5","location":"gym","level":"Advanced"}
+        ]
+      },
+      "functional_trainings": [
+        {"name":"Кроссфит‑тренировка «Меткон»","video_url":"https://youtu.be/FuncAdvanced1","description":"Сочетание бурпи, качаний гирей и прыжков на коробку."},
+        {"name":"Тренировка «Табата» – 20 сек. работа / 10 сек. отдых","video_url":"https://youtu.be/FuncAdvanced2","description":"Включает прыжки со скакалкой, отжимания, приседания."},
+        {"name":"Плиометрика для ног","video_url":"https://youtu.be/FuncAdvanced3","description":"Прыжки в длину, прыжки в высоту, боковые прыжки."}
+      ],
+      "nutrition_programs": [
+        {"program_name":"Сушка – 1800 ккал","kcal":1800,"protein_g":150,"fat_g":55,"carbs_g":150,
+         "recipe":{"title":"Куриные грудки с овощами на пару","ingredients":["200 г куриного филе","150 г брокколи","100 г морковь","1 ч.л. оливкового масла","соль, перец"],
+         "steps":["Куриное филе посолить, поперчить и обжарить на сковороде 2 мин.","Овощи нарезать, приготовить на пару 7‑8 мин.","Смешать всё, добавить масло и подавать."]}},
+        {"program_name":"Набор массы – 3000 ккал","kcal":3000,"protein_g":200,"fat_g":90,"carbs_g":350,
+         "recipe":{"title":"Говядина с рисом и авокадо","ingredients":["250 г говядины","200 г коричневого риса","1 авокадо","2 ч.л. соевого соуса","зелёный лук"],
+         "steps":["Говядину нарезать кубиками, обжарить до коричневой корочки.","Рис отварить до готовности (≈ 20 мин).","Смешать рис, мясо, нарезанное авокадо и соус, украсить зелёным луком."]}}
+      ],
+      "home_workouts_no_equipment": {},
+      "outdoor_workouts": {}
+    },
+
+    "Professional": {
+      "price": 3050,
+      "difficulty_label": "Профессионал",
+      "training_categories": {
+        "back": [
+          {"name":"Pro Back Pull‑1","video_url":"https://youtu.be/ProBack1","location":"gym","level":"Professional"},
+          {"name":"Pro Back Pull‑2","video_url":"https://youtu.be/ProBack2","location":"gym","level":"Professional"},
+          {"name":"Pro Back Pull‑3","video_url":"https://youtu.be/ProBack3","location":"gym","level":"Professional"},
+          {"name":"Pro Back Pull‑4","video_url":"https://youtu.be/ProBack4","location":"gym","level":"Professional"},
+          {"name":"Pro Back Pull‑5","video_url":"https://youtu.be/ProBack5","location":"gym","level":"Professional"}
+        ],
+        "biceps": [
+          {"name":"Pro Biceps Curl‑1","video_url":"https://youtu.be/ProBiceps1","location":"gym","level":"Professional"},
+          {"name":"Pro Biceps Curl‑2","video_url":"https://youtu.be/ProBiceps2","location":"gym","level":"Professional"},
+          {"name":"Pro Biceps Curl‑3","video_url":"https://youtu.be/ProBiceps3","location":"gym","level":"Professional"},
+          {"name":"Pro Biceps Curl‑4","video_url":"https://youtu.be/ProBiceps4","location":"gym","level":"Professional"},
+          {"name":"Pro Biceps Curl‑5","video_url":"https://youtu.be/ProBiceps5","location":"gym","level":"Professional"}
+        ],
+        "triceps": [
+          {"name":"Pro Triceps Press‑1","video_url":"https://youtu.be/ProTriceps1","location":"gym","level":"Professional"},
+          {"name":"Pro Triceps Press‑2","video_url":"https://youtu.be/ProTriceps2","location":"gym","level":"Professional"},
+          {"name":"Pro Triceps Press‑3","video_url":"https://youtu.be/ProTriceps3","location":"gym","level":"Professional"},
+          {"name":"Pro Triceps Press‑4","video_url":"https://youtu.be/ProTriceps4","location":"gym","level":"Professional"},
+          {"name":"Pro Triceps Press‑5","video_url":"https://youtu.be/ProTriceps5","location":"gym","level":"Professional"}
+        ],
+        "shoulders": [
+          {"name":"Pro Shoulder Press‑1","video_url":"https://youtu.be/ProShoulder1","location":"gym","level":"Professional"},
+          {"name":"Pro Shoulder Press‑2","video_url":"https://youtu.be/ProShoulder2","location":"gym","level":"Professional"},
+          {"name":"Pro Shoulder Press‑3","video_url":"https://youtu.be/ProShoulder3","location":"gym","level":"Professional"},
+          {"name":"Pro Shoulder Press‑4","video_url":"https://youtu.be/ProShoulder4","location":"gym","level":"Professional"},
+          {"name":"Pro Shoulder Press‑5","video_url":"https://youtu.be/ProShoulder5","location":"gym","level":"Professional"}
+        ],
+        "legs": [
+          {"name":"Pro Leg Squat‑1","video_url":"https://youtu.be/ProLeg1","location":"gym","level":"Professional"},
+          {"name":"Pro Leg Squat‑2","video_url":"https://youtu.be/ProLeg2","location":"gym","level":"Professional"},
+          {"name":"Pro Leg Squat‑3","video_url":"https://youtu.be/ProLeg3","location":"gym","level":"Professional"},
+          {"name":"Pro Leg Squat‑4","video_url":"https://youtu.be/ProLeg4","location":"gym","level":"Professional"},
+          {"name":"Pro Leg Squat‑5","video_url":"https://youtu.be/ProLeg5","location":"gym","level":"Professional"}
+        ],
+        "forearms": [
+          {"name":"Pro Forearm Curl‑1","video_url":"https://youtu.be/ProForearm1","location":"gym","level":"Professional"},
+          {"name":"Pro Forearm Curl‑2","video_url":"https://youtu.be/ProForearm2","location":"gym","level":"Professional"},
+          {"name":"Pro Forearm Curl‑3","video_url":"https://youtu.be/ProForearm3","location":"gym","level":"Professional"},
+          {"name":"Pro Forearm Curl‑4","video_url":"https://youtu.be/ProForearm4","location":"gym","level":"Professional"},
+          {"name":"Pro Forearm Curl‑5","video_url":"https://youtu.be/ProForearm5","location":"gym","level":"Professional"}
+        ]
+      },
+      "stretching_programs": [
+        {"name":"Глубокая растяжка спины","video_url":"https://youtu.be/StretchPro1","duration_min":15},
+        {"name":"Растяжка бедер и подколенных сухожилий","video_url":"https://youtu.be/StretchPro2","duration_min":12}
+      ],
+      "yoga_sessions": [
+        {"name":"Йога‑поток «Сила и гибкость»","video_url":"https://youtu.be/YogaPro1","duration_min":45},
+        {"name":"Восстановительная йога 30‑минут","video_url":"https://youtu.be/YogaPro2","duration_min":30}
+      ],
+      "functional_trainings": [
+        {"name":"Тренировка «Боевой готовности»","video_url":"https://youtu.be/FuncPro1","description":"Кроссфит‑комплекс с гирями, канатом и метанием медболов."},
+        {"name":"HIIT‑сессия «Взрывная мощь»","video_url":"https://youtu.be/FuncPro2","description":"20‑сек. спринт + 40‑сек. отдых, 10 раундов."}
+      ],
+      "split_trainings_full_body": [
+        {"name":"Full‑Body Split A","exercises":["Pro Back Pull‑1","Pro Chest Press‑1","Pro Leg Squat‑1","Pro Shoulder Press‑1","Pro Core Plank‑1"]},
+        {"name":"Full‑Body Split B","exercises":["Pro Back Pull‑2","Pro Chest Press‑2","Pro Leg Squat‑2","Pro Shoulder Press‑2","Pro Core Russian Twist‑1"]}
+      ],
+      "personal_nutrition_selection": {
+        "description": "Индивидуальный подбор макронутриентов под цели клиента (снижение веса, набор массы, поддержание формы).",
+        "example": {"goal":"Набор массы","kcal":3400,"protein_g":250,"fat_g":100,"carbs_g":420}
+      },
+      "individual_program_with_goals": {
+        "goal_options": ["Снижение % тела","Увеличение силы","Подготовка к соревнованиям","Восстановление после травмы"],
+        "support_24_7": true,
+        "bonus_stars": 10,
+        "secret_methods": ["Методика «Периодизации 4‑фаз»","Техника «Ментальная визуализация нагрузки»","Упражнение «Фермерский шаг» для укрепления хвата"],
+        "cardio_programs": [
+          {"name":"Интервальный бег 5‑х‑5 мин","video_url":"https://youtu.be/CardioPro1"},
+          {"name":"Велотренажёр HIIT 30‑мин","video_url":"https://youtu.be/CardioPro2"}
+        ],
+        "athlete_requests": ["Тренировка для марафонца","Силовая подготовка для тяжелоатлета","Восстановление после травмы колена"]
+      },
+      "home_workouts_no_equipment": {},
+      "outdoor_workouts": {}
+    }
+  }
+}
