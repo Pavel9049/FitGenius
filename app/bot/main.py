@@ -1,0 +1,25 @@
+import asyncio
+import logging
+
+from aiogram import Bot, Dispatcher
+from aiogram.client.default import DefaultBotProperties
+from aiogram.enums import ParseMode
+
+from app.core.config import get_settings
+from app.bot.routers import auth as auth_router
+
+
+async def main() -> None:
+	settings = get_settings()
+	logging.basicConfig(level=getattr(logging, settings.log_level.upper(), logging.INFO))
+	bot = Bot(
+		token=settings.telegram_bot_token,
+		default=DefaultBotProperties(parse_mode=ParseMode.HTML),
+	)
+	dp = Dispatcher()
+	dp.include_router(auth_router.router)
+	await dp.start_polling(bot)
+
+
+if __name__ == "__main__":
+	asyncio.run(main())
