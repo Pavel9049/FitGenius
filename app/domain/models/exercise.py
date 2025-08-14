@@ -14,3 +14,4 @@ class Exercise(Base):
 	name: Mapped[str] = mapped_column(String(100))
 	video_url: Mapped[str | None] = mapped_column(String(255), nullable=True)
 	description: Mapped[str | None] = mapped_column(String(500), nullable=True)
+	equipment: Mapped[str] = mapped_column(String(16), default="gym", index=True)  # gym|bodyweight

@@ -3,7 +3,7 @@ from __future__ import annotations
 from contextlib import contextmanager
 from typing import Iterator
 
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker, Session
 
 from app.core.config import get_settings
@@ -33,7 +33,22 @@ def init_db() -> None:
 	from app.domain.models import program as _  # noqa: F401
 	from app.domain.models import workout_log as _  # noqa: F401
 	from app.domain.models import payment as _  # noqa: F401
+	from app.domain.models import goal as _  # noqa: F401
+	from app.domain.models import photo_report as _  # noqa: F401
 	Base.metadata.create_all(bind=engine)
+	# Lightweight migration for SQLite
+	if _is_sqlite:
+		with engine.begin() as conn:
+			conn.execute(text("""
+				CREATE TABLE IF NOT EXISTS _m (id INTEGER PRIMARY KEY);
+			"""))
+			# Try adding column if not exists
+			conn.execute(text("""
+				PRAGMA table_info(exercises);
+			"""))
+			cols = [row[1] for row in conn.exec_driver_sql("PRAGMA table_info(exercises)").fetchall()]
+			if "equipment" not in cols:
+				conn.execute(text("ALTER TABLE exercises ADD COLUMN equipment VARCHAR(16) DEFAULT 'gym';"))
 
 
 @contextmanager

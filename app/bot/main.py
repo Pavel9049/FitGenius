@@ -15,6 +15,8 @@ from app.bot.routers import programs as programs_router
 from app.bot.middlewares.locale import LocaleMiddleware
 from app.bot.middlewares.access import AccessMiddleware
 from app.infra.db.session import init_db
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
+from app.tasks.schedulers import setup_scheduler
 
 
 async def main() -> None:
@@ -35,6 +37,10 @@ async def main() -> None:
 	dp.include_router(workouts_router.router)
 	dp.include_router(auth_router.router)
 	dp.include_router(programs_router.router)
+	# Scheduler
+	scheduler = AsyncIOScheduler(timezone="UTC")
+	setup_scheduler(scheduler)
+	scheduler.start()
 	await dp.start_polling(bot)
 
 
