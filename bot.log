@@ -90,3 +90,8 @@ aiogram.exceptions.TelegramBadRequest: Telegram server says - Bad Request: can't
 INFO:aiogram.event:Update id=268029213 is handled. Duration 292 ms by bot id=8269244638
 INFO:aiogram.event:Update id=268029215 is handled. Duration 307 ms by bot id=8269244638
 INFO:aiogram.event:Update id=268029216 is handled. Duration 295 ms by bot id=8269244638
+INFO:aiogram.event:Update id=268029217 is handled. Duration 301 ms by bot id=8269244638
+INFO:aiogram.event:Update id=268029218 is handled. Duration 398 ms by bot id=8269244638
+INFO:aiogram.event:Update id=268029219 is handled. Duration 141 ms by bot id=8269244638
+INFO:aiogram.event:Update id=268029220 is handled. Duration 310 ms by bot id=8269244638
+INFO:aiogram.event:Update id=268029221 is handled. Duration 368 ms by bot id=8269244638
