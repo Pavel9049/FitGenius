@@ -1,6 +1,8 @@
 {
 	"start": "¡Hola! Soy MyFitnessBot. Elige un idioma para comenzar. Comandos: /help",
-	"help": "Comandos disponibles:\n/start — inicio\n/help — ayuda\n/lang — idioma",
+	"help": "Comandos disponibles:\n/start — inicio\n/help — ayuda\n/lang — idioma\n/start_workout — iniciar entrenamiento\n/done — terminar entrenamiento",
 	"choose_language": "Elige tu idioma",
-	"language_changed": "Idioma cambiado a: {language}"
+	"language_changed": "Idioma cambiado a: {language}",
+	"workout_start": "¡Vamos! Realiza los ejercicios y envía /done al terminar.",
+	"workout_done": "¡Genial! Ganaste XP: {xp}, estrellas: {stars}."
 }

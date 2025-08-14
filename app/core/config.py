@@ -14,7 +14,7 @@ class Settings(BaseSettings):
 	telegram_bot_token: str = Field(alias="TELEGRAM_BOT_TOKEN")
 	redis_url: str = Field(default="redis://localhost:6379/0", alias="REDIS_URL")
 	database_url: str = Field(
-		default="postgresql+psycopg://user:pass@localhost:5432/myfitnessbot",
+		default="sqlite:///./myfitnessbot.db",
 		alias="DATABASE_URL",
 	)
 	sentry_dsn: Optional[str] = Field(default=None, alias="SENTRY_DSN")

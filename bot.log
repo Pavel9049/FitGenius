@@ -1,7 +1,41 @@
-INFO:aiogram.dispatcher:Start polling
-INFO:aiogram.dispatcher:Run polling for bot @FitCoode_bot id=8269244638 - 'FItCode'
-INFO:aiogram.event:Update id=268029165 is handled. Duration 300 ms by bot id=8269244638
-INFO:aiogram.event:Update id=268029166 is handled. Duration 195 ms by bot id=8269244638
-INFO:aiogram.event:Update id=268029167 is handled. Duration 119 ms by bot id=8269244638
-INFO:aiogram.event:Update id=268029168 is handled. Duration 105 ms by bot id=8269244638
-INFO:aiogram.event:Update id=268029169 is handled. Duration 113 ms by bot id=8269244638
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/workspace/app/bot/main.py", line 34, in <module>
+    asyncio.run(main())
+    ~~~~~~~~~~~^^^^^^^^
+  File "/usr/lib/python3.13/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/usr/lib/python3.13/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "uvloop/loop.pyx", line 1518, in uvloop.loop.Loop.run_until_complete
+  File "/workspace/app/bot/main.py", line 19, in main
+    init_db()
+    ~~~~~~~^^
+  File "/workspace/app/infra/db/session.py", line 35, in init_db
+    from app.domain.models import payment as _  # noqa: F401
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/app/domain/models/payment.py", line 11, in <module>
+    class Payment(Base):
+    ...<9 lines>...
+    	metadata: Mapped[str | None] = mapped_column(String(500), nullable=True)
+  File "/workspace/.venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_api.py", line 845, in __init_subclass__
+    _as_declarative(cls._sa_registry, cls, cls.__dict__)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/.venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 245, in _as_declarative
+    return _MapperConfig.setup_mapping(registry, cls, dict_, None, {})
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/.venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 326, in setup_mapping
+    return _ClassScanMapperConfig(
+        registry, cls_, dict_, table, mapper_kw
+    )
+  File "/workspace/.venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 573, in __init__
+    self._extract_mappable_attributes()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/workspace/.venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 1530, in _extract_mappable_attributes
+    raise exc.InvalidRequestError(
+    ...<2 lines>...
+    )
+sqlalchemy.exc.InvalidRequestError: Attribute name 'metadata' is reserved when using the Declarative API.

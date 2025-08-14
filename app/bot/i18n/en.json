@@ -1,6 +1,8 @@
 {
 	"start": "Hi! I'm MyFitnessBot. Choose a language to get started. Commands: /help",
-	"help": "Available commands:\n/start — start\n/help — help\n/lang — language",
+	"help": "Available commands:\n/start — start\n/help — help\n/lang — language\n/start_workout — start workout\n/done — complete workout",
 	"choose_language": "Choose your language",
-	"language_changed": "Language switched to: {language}"
+	"language_changed": "Language switched to: {language}",
+	"workout_start": "Go! Do your exercises and send /done when finished.",
+	"workout_done": "Great! Awarded XP: {xp}, stars: {stars}."
 }
