@@ -3,3 +3,6 @@ INFO:apscheduler.scheduler:Added job "weekly_refresh_catalog" to job store "defa
 INFO:apscheduler.scheduler:Scheduler started
 INFO:aiogram.dispatcher:Start polling
 INFO:aiogram.dispatcher:Run polling for bot @FitCoode_bot id=8269244638 - 'FItCode'
+INFO:aiogram.event:Update id=268029302 is handled. Duration 697 ms by bot id=8269244638
+INFO:aiogram.event:Update id=268029303 is handled. Duration 622 ms by bot id=8269244638
+INFO:aiogram.event:Update id=268029304 is handled. Duration 389 ms by bot id=8269244638
