@@ -53,6 +53,8 @@ def init_db() -> None:
 				conn.execute(text("ALTER TABLE program_exercises ADD COLUMN sets_desc VARCHAR(64);"))
 			if "rest_desc" not in cols_pe:
 				conn.execute(text("ALTER TABLE program_exercises ADD COLUMN rest_desc VARCHAR(64);"))
+			if "tip_text" not in cols_pe:
+				conn.execute(text("ALTER TABLE program_exercises ADD COLUMN tip_text VARCHAR(200);"))
 
 
 @contextmanager

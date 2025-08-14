@@ -25,3 +25,4 @@ class ProgramExercise(Base):
 	order_index: Mapped[int] = mapped_column(Integer, default=0)
 	sets_desc: Mapped[str | None] = mapped_column(String(64), nullable=True)
 	rest_desc: Mapped[str | None] = mapped_column(String(64), nullable=True)
+	tip_text: Mapped[str | None] = mapped_column(String(200), nullable=True)
