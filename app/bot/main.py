@@ -27,6 +27,12 @@ async def main() -> None:
 		token=settings.telegram_bot_token,
 		default=DefaultBotProperties(parse_mode=ParseMode.HTML),
 	)
+	# Сбрасываем вебхук и висящие апдейты перед polling
+	try:
+		await bot.delete_webhook(drop_pending_updates=True)
+	except Exception:
+		pass
+	
 	dp = Dispatcher()
 	dp.message.middleware(LocaleMiddleware())
 	dp.callback_query.middleware(LocaleMiddleware())
