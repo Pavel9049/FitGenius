@@ -9,7 +9,9 @@ from app.core.config import get_settings
 from app.bot.routers import auth as auth_router
 from app.bot.routers import lang as lang_router
 from app.bot.routers import workouts as workouts_router
+from app.bot.routers import payments as payments_router
 from app.bot.middlewares.locale import LocaleMiddleware
+from app.bot.middlewares.access import AccessMiddleware
 from app.infra.db.session import init_db
 
 
@@ -24,8 +26,10 @@ async def main() -> None:
 	dp = Dispatcher()
 	dp.message.middleware(LocaleMiddleware())
 	dp.callback_query.middleware(LocaleMiddleware())
+	dp.message.middleware(AccessMiddleware())
 	dp.include_router(auth_router.router)
 	dp.include_router(lang_router.router)
+	dp.include_router(payments_router.router)
 	dp.include_router(workouts_router.router)
 	await dp.start_polling(bot)
 

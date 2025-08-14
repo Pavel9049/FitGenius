@@ -1,9 +1,2 @@
 INFO:aiogram.dispatcher:Start polling
 INFO:aiogram.dispatcher:Run polling for bot @FitCoode_bot id=8269244638 - 'FItCode'
-INFO:aiogram.event:Update id=268029174 is handled. Duration 287 ms by bot id=8269244638
-INFO:aiogram.event:Update id=268029178 is handled. Duration 315 ms by bot id=8269244638
-INFO:aiogram.event:Update id=268029175 is handled. Duration 341 ms by bot id=8269244638
-INFO:aiogram.event:Update id=268029176 is handled. Duration 376 ms by bot id=8269244638
-INFO:aiogram.event:Update id=268029177 is handled. Duration 405 ms by bot id=8269244638
-INFO:aiogram.event:Update id=268029179 is handled. Duration 108 ms by bot id=8269244638
-INFO:aiogram.event:Update id=268029180 is handled. Duration 159 ms by bot id=8269244638
