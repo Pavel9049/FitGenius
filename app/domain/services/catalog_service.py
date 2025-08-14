@@ -10,7 +10,7 @@ from sqlalchemy.orm import Session
 from app.domain.models.exercise import Exercise
 from app.domain.models.program import WorkoutProgram, ProgramExercise
 
-MUSCLE_GROUPS = ["back", "biceps", "triceps", "shoulders", "legs", "forearms"]
+MUSCLE_GROUPS = ["back", "biceps", "triceps", "shoulders", "legs", "forearms", "core"]
 LEVELS = ["beginner", "novice", "advanced", "pro"]
 TYPES = ["split", "home", "street", "gym"]
 
@@ -43,6 +43,11 @@ EXERCISE_POOL_GYM: dict[str, list[str]] = {
 		"Сгибания запястий со штангой", "Разгибания запястий", "Фермерская прогулка", "Обратный хват штанги",
 		"Роллер для предплечий", "Сжатие эспандера", "Вращение гантели", "Пронация/супинация с гантелью",
 	],
+	"core": [
+		"Кранчи на блоке", "Подъём ног в висе", "Колесо для пресса", "Скручивания на скамье",
+		"Планка с диском", "Русский твист с гантелью", "Кранчи в тренажёре", "Велосипед с утяжелением",
+		"Планка на мяче", "Слайдинги коленей с полотенцем",
+	],
 }
 
 EXERCISE_POOL_BW: dict[str, list[str]] = {
@@ -71,6 +76,10 @@ EXERCISE_POOL_BW: dict[str, list[str]] = {
 	"forearms": [
 		"Сжимание эспандера", "Вис на турнике", "Скручивание полотенца", "Изометрия кисти",
 		"Перекидывание бутылки", "Кручение эспандера", "Подъём на пальцы", "Пронация кисти без веса",
+	],
+	"core": [
+		"Планка", "Боковая планка", "Скручивания", "Подъём ног лёжа", "Велосипед",
+		"Русский твист", "V-up", "Hollow hold", "Dead bug", "Маунтин-клаймбер",
 	],
 }
 

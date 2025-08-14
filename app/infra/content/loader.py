@@ -24,6 +24,9 @@ RU_TO_MG = {
 	"Плечи": "shoulders",
 	"Ноги": "legs",
 	"Предплечья": "forearms",
+	"Пресс": "core",
+	"Кор": "core",
+	"Кор/Пресс": "core",
 }
 
 BODYWEIGHT_HINTS = [

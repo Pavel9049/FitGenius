@@ -58,5 +58,8 @@ def muscle_groups_keyboard() -> InlineKeyboardMarkup:
 				InlineKeyboardButton(text="Ноги", callback_data="prog:mg:legs"),
 				InlineKeyboardButton(text="Предплечья", callback_data="prog:mg:forearms"),
 			],
+			[
+				InlineKeyboardButton(text="Пресс", callback_data="prog:mg:core"),
+			]
 		]
 	)

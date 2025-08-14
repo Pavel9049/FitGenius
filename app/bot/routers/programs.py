@@ -68,6 +68,7 @@ async def pick_type(call: CallbackQuery) -> None:
 			"shoulders": "Плечи",
 			"legs": "Ноги",
 			"forearms": "Предплечья",
+			"core": "Пресс",
 		}[mg]
 		kb.button(text=text, callback_data=f"prog:mg:{mg}:{type_}:{level}")
 	kb.adjust(2)
