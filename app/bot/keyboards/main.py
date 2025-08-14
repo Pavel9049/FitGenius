@@ -12,6 +12,7 @@ def main_menu_keyboard(trial_available: bool, has_active: bool) -> InlineKeyboar
 		InlineKeyboardButton(text="Профиль", callback_data="start:profile"),
 		InlineKeyboardButton(text="Помощь", callback_data="start:help"),
 	])
+	rows.append([InlineKeyboardButton(text="Условия", callback_data="start:terms")])
 	return InlineKeyboardMarkup(inline_keyboard=rows)
 
 

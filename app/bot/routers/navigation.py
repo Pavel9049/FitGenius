@@ -27,6 +27,11 @@ def _has_active_subscription(session: Session, tg_id: int) -> bool:
 	return active is not None
 
 
+def _terms_path(lang: str) -> str:
+	fname = {"ru": "terms_ru.md", "en": "terms_en.md", "es": "terms_es.md"}.get(lang, "terms_ru.md")
+	return f"/workspace/app/infra/content/legal/{fname}"
+
+
 @router.message(CommandStart())
 async def start(message: Message, lang: str) -> None:
 	global _INITIALIZED
@@ -49,6 +54,21 @@ async def start(message: Message, lang: str) -> None:
 		"Добро пожаловать! Выберите действие ниже:",
 		reply_markup=main_menu_keyboard(trial_available, has_active),
 	)
+
+
+@router.callback_query(F.data == "start:terms")
+async def cb_terms(call: CallbackQuery, lang: str) -> None:
+	path = _terms_path(lang)
+	try:
+		text = open(path, "r", encoding="utf-8").read()
+	except Exception:
+		text = "Пользовательское соглашение временно недоступно."
+	# Telegram ограничивает длину сообщений; отрежем до ~3500 символов
+	if len(text) > 3500:
+		text = text[:3500] + "\n..."
+	await call.message.edit_text(text)
+	await call.message.edit_reply_markup(reply_markup=None)
+	await call.answer()
 
 
 @router.callback_query(F.data == "start:trial")
