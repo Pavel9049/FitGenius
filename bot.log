@@ -4,3 +4,6 @@ INFO:apscheduler.scheduler:Scheduler started
 INFO:root:MyFitnessBot starting polling (env=local, anim_style=ultra, behavior=delete_then_send)
 INFO:aiogram.dispatcher:Start polling
 INFO:aiogram.dispatcher:Run polling for bot @FitCoode_bot id=8269244638 - 'FItCode'
+INFO:aiogram.event:Update id=268029311 is handled. Duration 817 ms by bot id=8269244638
+INFO:aiogram.event:Update id=268029312 is handled. Duration 525 ms by bot id=8269244638
+INFO:aiogram.event:Update id=268029313 is handled. Duration 739 ms by bot id=8269244638
