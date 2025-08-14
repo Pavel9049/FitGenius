@@ -7,6 +7,7 @@ from app.infra.db.session import get_session
 from app.domain.services.catalog_service import CatalogService, MUSCLE_GROUPS
 from app.domain.services.workouts_service import WorkoutsService
 from app.bot.utils.animations import evaporate_and_edit
+from app.domain.services.banner_service import get_header
 
 router = Router(name=__name__)
 
@@ -21,7 +22,8 @@ async def pick_level(call: CallbackQuery) -> None:
 		for g in GOALS:
 			kb.button(text=g, callback_data=f"prog:setgoal:{level}:{g}")
 		kb.adjust(2)
-		await evaporate_and_edit(call.message, "Выберите вашу цель тренировки:", reply_markup=kb.as_markup())
+		header = get_header()
+		await evaporate_and_edit(call.message, f"{header}\nВыберите вашу цель тренировки:", reply_markup=kb.as_markup())
 		await call.answer()
 		return
 	kb = InlineKeyboardBuilder()
@@ -30,7 +32,8 @@ async def pick_level(call: CallbackQuery) -> None:
 	kb.button(text="Улица", callback_data=f"prog:type:street:{level}")
 	kb.button(text="Зал", callback_data=f"prog:type:gym:{level}")
 	kb.adjust(2)
-	await evaporate_and_edit(call.message, "Выберите тип программы", reply_markup=kb.as_markup())
+	header = get_header()
+	await evaporate_and_edit(call.message, f"{header}\nВыберите тип программы", reply_markup=kb.as_markup())
 	await call.answer()
 
 
@@ -48,7 +51,8 @@ async def set_goal(call: CallbackQuery, lang: str) -> None:
 	kb.button(text="Улица", callback_data=f"prog:type:street:{level}")
 	kb.button(text="Зал", callback_data=f"prog:type:gym:{level}")
 	kb.adjust(2)
-	await evaporate_and_edit(call.message, f"Цель сохранена: {goal}. Теперь выберите тип программы:", reply_markup=kb.as_markup())
+	header = get_header()
+	await evaporate_and_edit(call.message, f"{header}\nЦель сохранена: {goal}. Теперь выберите тип программы:", reply_markup=kb.as_markup())
 	await call.answer()
 
 
@@ -69,7 +73,8 @@ async def pick_type(call: CallbackQuery) -> None:
 		}[mg]
 		kb.button(text=text, callback_data=f"prog:mg:{mg}:{type_}:{level}")
 	kb.adjust(2)
-	await evaporate_and_edit(call.message, "Выберите группу мышц", reply_markup=kb.as_markup())
+	header = get_header()
+	await evaporate_and_edit(call.message, f"{header}\nВыберите группу мышц", reply_markup=kb.as_markup())
 	await call.answer()
 
 
@@ -84,7 +89,8 @@ async def show_programs(call: CallbackQuery) -> None:
 	for pv in views[:10]:
 		kb.button(text=pv.program.name, callback_data=f"prog:show:{pv.program.id}:{level}:{type_}")
 	kb.adjust(1)
-	await evaporate_and_edit(call.message, f"Программы для {mg} — {level}/{type_}", reply_markup=kb.as_markup())
+	header = get_header()
+	await evaporate_and_edit(call.message, f"{header}\nПрограммы для {mg} — {level}/{type_}", reply_markup=kb.as_markup())
 	await call.answer()
 
 
@@ -117,7 +123,6 @@ async def show_program_detail(call: CallbackQuery) -> None:
 				lines.append(f"• {ex.name}{meta_str}\n  💡 {row.tip_text}")
 			else:
 				lines.append(f"• {ex.name}{meta_str}")
-		# Добавляем упражнения на пресс
 		if type_ == "gym" or type_ == "split":
 			core_pool = session.scalars(select(Exercise).where(Exercise.muscle_group == "core", Exercise.equipment == "gym")).all()
 		else:
@@ -130,7 +135,8 @@ async def show_program_detail(call: CallbackQuery) -> None:
 	for diff in ["Лёгкая", "Средняя", "Сложная"]:
 		kb.button(text=diff, callback_data=f"prog:diff:{program_id}:{level}:{type_}:{diff}")
 	kb.adjust(3)
-	desc = f"{prog.name}\nУпражнения:\n" + "\n".join(lines)
+	header = get_header()
+	desc = f"{header}\n{prog.name}\nУпражнения:\n" + "\n".join(lines)
 	await evaporate_and_edit(call.message, desc + "\nВыберите сложность для подбора весов:", reply_markup=kb.as_markup())
 	await call.answer()
 
@@ -143,7 +149,8 @@ async def choose_goal_and_weights(call: CallbackQuery) -> None:
 	for goal in GOALS:
 		kb.button(text=goal, callback_data=f"prog:goal:{program_id}:{level}:{type_}:{diff}:{goal}")
 	kb.adjust(2)
-	await evaporate_and_edit(call.message, "Выберите цель тренировки:", reply_markup=kb.as_markup())
+	header = get_header()
+	await evaporate_and_edit(call.message, f"{header}\nВыберите цель тренировки:", reply_markup=kb.as_markup())
 	await call.answer()
 
 
@@ -165,6 +172,7 @@ def _weight_hint(diff: str, goal: str) -> str:
 @router.callback_query(F.data.startswith("prog:goal:"))
 async def show_weights(call: CallbackQuery) -> None:
 	_, _, pid, level, type_, diff, goal = call.data.split(":", 6)
+	header = get_header()
 	hint = _weight_hint(diff, goal)
-	await evaporate_and_edit(call.message, f"Сложность: {diff}\nЦель: {goal}\n{hint}")
+	await evaporate_and_edit(call.message, f"{header}\nСложность: {diff}\nЦель: {goal}\n{hint}")
 	await call.answer()

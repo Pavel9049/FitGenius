@@ -14,6 +14,7 @@ import os
 from app.infra.content.loader import import_workouts_dataset, import_splits_dataset
 from app.bot.utils.animations import evaporate_and_edit
 from app.domain.services.phrases_service import get_random_phrase
+from app.domain.services.banner_service import get_header, get_welcome_banner
 
 router = Router(name=__name__)
 
@@ -56,8 +57,10 @@ async def start(message: Message, lang: str) -> None:
 		await message.delete()
 	except Exception:
 		pass
-	msg = await message.answer("…")
-	await evaporate_and_edit(msg, "Добро пожаловать! Выберите действие ниже:", reply_markup=main_menu_keyboard(trial_available, has_active))
+	banner = get_welcome_banner()
+	msg = await message.answer(banner)
+	header = get_header()
+	await evaporate_and_edit(msg, f"{header}\nДобро пожаловать! Выберите действие ниже:", reply_markup=main_menu_keyboard(trial_available, has_active))
 
 
 @router.callback_query(F.data == "start:terms")
@@ -69,7 +72,8 @@ async def cb_terms(call: CallbackQuery, lang: str) -> None:
 		text = "Пользовательское соглашение временно недоступно."
 	if len(text) > 3500:
 		text = text[:3500] + "\n..."
-	await evaporate_and_edit(call.message, text)
+	header = get_header()
+	await evaporate_and_edit(call.message, f"{header}\n{text}")
 	await call.answer()
 
 
@@ -84,19 +88,22 @@ async def cb_trial(call: CallbackQuery, lang: str) -> None:
 		except ValueError:
 			await call.answer("Триал уже использован", show_alert=True)
 			return
-	await evaporate_and_edit(call.message, "Триал активирован на 24 часа. Перейдите к выбору программ.")
+	header = get_header()
+	await evaporate_and_edit(call.message, f"{header}\nТриал активирован на 24 часа. Перейдите к выбору программ.")
 	await call.answer()
 
 
 @router.callback_query(F.data == "start:programs")
 async def cb_programs(call: CallbackQuery) -> None:
-	await evaporate_and_edit(call.message, "Выберите уровень", reply_markup=levels_keyboard())
+	header = get_header()
+	await evaporate_and_edit(call.message, f"{header}\nВыберите уровень", reply_markup=levels_keyboard())
 	await call.answer()
 
 
 @router.callback_query(F.data == "start:pay")
 async def cb_pay(call: CallbackQuery) -> None:
-	await evaporate_and_edit(call.message, "Выберите план в /plans или используйте кнопки оплаты в следующей версии.")
+	header = get_header()
+	await evaporate_and_edit(call.message, f"{header}\nВыберите план в /plans или используйте кнопки оплаты в следующей версии.")
 	await call.answer()
 
 
@@ -106,16 +113,19 @@ async def cb_profile(call: CallbackQuery, lang: str) -> None:
 		from app.domain.models.user import User
 		user = session.scalar(select(User).where(User.tg_id == call.from_user.id))
 		if not user:
-			await evaporate_and_edit(call.message, "Профиль не найден.")
+			header = get_header()
+			await evaporate_and_edit(call.message, f"{header}\nПрофиль не найден.")
 			await call.answer()
 			return
 		phrase = get_random_phrase(lang)
-		text = f"Ваш профиль\nXP: {user.xp}\nЗвёзды: {user.stars}\nСерия дней (streak): {user.streak}\n\n{phrase}"
+		header = get_header()
+		text = f"{header}\nВаш профиль\nXP: {user.xp}\nЗвёзды: {user.stars}\nСерия дней (streak): {user.streak}\n\n{phrase}"
 	await evaporate_and_edit(call.message, text)
 	await call.answer()
 
 
 @router.callback_query(F.data == "start:help")
 async def cb_help(call: CallbackQuery) -> None:
-	await evaporate_and_edit(call.message, "Нажмите 'Выбрать программу' для каталога. Для доступа — активируйте триал или оплатите.")
+	header = get_header()
+	await evaporate_and_edit(call.message, f"{header}\nНажмите 'Выбрать программу' для каталога. Для доступа — активируйте триал или оплатите.")
 	await call.answer()
