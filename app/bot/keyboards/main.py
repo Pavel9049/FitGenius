@@ -37,6 +37,7 @@ def types_keyboard() -> InlineKeyboardMarkup:
 				InlineKeyboardButton(text="Сплит", callback_data="prog:type:split"),
 				InlineKeyboardButton(text="Дом", callback_data="prog:type:home"),
 				InlineKeyboardButton(text="Улица", callback_data="prog:type:street"),
+				InlineKeyboardButton(text="Зал", callback_data="prog:type:gym"),
 			]
 		]
 	)

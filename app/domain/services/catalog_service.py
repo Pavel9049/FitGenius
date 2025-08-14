@@ -12,7 +12,7 @@ from app.domain.models.program import WorkoutProgram, ProgramExercise
 
 MUSCLE_GROUPS = ["back", "biceps", "triceps", "shoulders", "legs", "forearms"]
 LEVELS = ["beginner", "novice", "advanced", "pro"]
-TYPES = ["split", "home", "street"]
+TYPES = ["split", "home", "street", "gym"]
 
 EXERCISE_POOL: dict[str, list[str]] = {
 	"back": [
@@ -83,18 +83,17 @@ class CatalogService:
 					self.session.add(ProgramExercise(program_id=program.id, exercise_id=ex.id, order_index=k))
 		self.session.commit()
 
-	def _seed_home_street_for_level(self, level: str) -> None:
-		# Для типов home/street: по 10 упражнений на каждую группу мышц
-		for t in ("home", "street"):
-			for mg in MUSCLE_GROUPS:
-				program = WorkoutProgram(level=level, type=t, name=f"{t}:{mg}:{level}")
-				self.session.add(program)
-				self.session.flush()
-				pool = self.session.scalars(select(Exercise).where(Exercise.muscle_group == mg)).all()
-				idx = 0
-				for ex in pool[:10]:
-					self.session.add(ProgramExercise(program_id=program.id, exercise_id=ex.id, order_index=idx))
-					idx += 1
+	def _seed_block_for_level_and_type(self, level: str, t: str) -> None:
+		# Для типов home/street/gym: по 10 упражнений на каждую группу мышц
+		for mg in MUSCLE_GROUPS:
+			program = WorkoutProgram(level=level, type=t, name=f"{t}:{mg}:{level}")
+			self.session.add(program)
+			self.session.flush()
+			pool = self.session.scalars(select(Exercise).where(Exercise.muscle_group == mg)).all()
+			idx = 0
+			for ex in pool[:10]:
+				self.session.add(ProgramExercise(program_id=program.id, exercise_id=ex.id, order_index=idx))
+				idx += 1
 		self.session.commit()
 
 	def seed_all(self) -> None:
@@ -105,7 +104,8 @@ class CatalogService:
 			return
 		for level in LEVELS:
 			self._seed_splits_for_level(level)
-			self._seed_home_street_for_level(level)
+			for t in ("home", "street", "gym"):
+				self._seed_block_for_level_and_type(level, t)
 
 	def list_programs(self, level: str, type_: str, muscle_group: str | None = None) -> list[ProgramView]:
 		q = select(WorkoutProgram).where(WorkoutProgram.level == level, WorkoutProgram.type == type_)
