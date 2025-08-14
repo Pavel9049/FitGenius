@@ -1,14 +1,6 @@
 INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
 INFO:apscheduler.scheduler:Added job "weekly_refresh_catalog" to job store "default"
 INFO:apscheduler.scheduler:Scheduler started
+INFO:root:MyFitnessBot starting polling (env=local, anim_style=ultra, behavior=delete_then_send)
 INFO:aiogram.dispatcher:Start polling
 INFO:aiogram.dispatcher:Run polling for bot @FitCoode_bot id=8269244638 - 'FItCode'
-INFO:aiogram.event:Update id=268029302 is handled. Duration 697 ms by bot id=8269244638
-INFO:aiogram.event:Update id=268029303 is handled. Duration 622 ms by bot id=8269244638
-INFO:aiogram.event:Update id=268029304 is handled. Duration 389 ms by bot id=8269244638
-INFO:aiogram.event:Update id=268029305 is handled. Duration 392 ms by bot id=8269244638
-INFO:aiogram.event:Update id=268029306 is handled. Duration 518 ms by bot id=8269244638
-INFO:aiogram.event:Update id=268029307 is handled. Duration 659 ms by bot id=8269244638
-INFO:aiogram.event:Update id=268029308 is handled. Duration 611 ms by bot id=8269244638
-INFO:aiogram.event:Update id=268029309 is handled. Duration 398 ms by bot id=8269244638
-INFO:aiogram.event:Update id=268029310 is handled. Duration 407 ms by bot id=8269244638

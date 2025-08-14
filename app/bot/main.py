@@ -41,6 +41,7 @@ async def main() -> None:
 	scheduler = AsyncIOScheduler(timezone="UTC")
 	setup_scheduler(scheduler)
 	scheduler.start()
+	logging.info("MyFitnessBot starting polling (env=%s, anim_style=%s, behavior=%s)", settings.environment, settings.animation_style, settings.animation_behavior)
 	await dp.start_polling(bot)
 
 
