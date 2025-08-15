@@ -1,0 +1,36 @@
+from __future__ import annotations
+
+from functools import lru_cache
+from typing import Literal, Optional
+
+from pydantic import Field
+from pydantic_settings import BaseSettings, SettingsConfigDict
+
+
+class Settings(BaseSettings):
+	model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
+
+	environment: Literal["local", "staging", "prod"] = Field(default="local", alias="ENVIRONMENT")
+	telegram_bot_token: str = Field(alias="TELEGRAM_BOT_TOKEN")
+	redis_url: str = Field(default="redis://localhost:6379/0", alias="REDIS_URL")
+	database_url: str = Field(
+		default="sqlite:///./myfitnessbot.db",
+		alias="DATABASE_URL",
+	)
+	sentry_dsn: Optional[str] = Field(default=None, alias="SENTRY_DSN")
+	log_level: str = Field(default="INFO", alias="LOG_LEVEL")
+
+	# Animations
+	animation_style: str = Field(default="fade", alias="ANIM_STYLE")  # fade|ultra|dots|blocks|dissolve|wipe|blink|none
+	animation_frame_ms: int = Field(default=100, alias="ANIM_FRAME_MS")
+	animation_total_ms: int = Field(default=1600, alias="ANIM_TOTAL_MS")
+	animation_max_frames: int = Field(default=24, alias="ANIM_MAX_FRAMES")
+	animation_behavior: str = Field(default="delete_then_send", alias="ANIM_BEHAVIOR")  # edit|delete_then_send
+
+	# Branding
+	banner_title: str = Field(default="FitCode", alias="BANNER_TITLE")
+
+
+@lru_cache
+def get_settings() -> Settings:
+	return Settings()  # type: ignore[call-arg]
